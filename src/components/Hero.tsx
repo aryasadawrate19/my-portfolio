@@ -184,18 +184,20 @@ export default function Hero() {
   }, []);
 
   return (
-    <section className="relative min-h-screen flex flex-col md:flex-row items-center justify-between overflow-hidden pt-20 md:pt-0">
+  <section className="relative min-h-screen flex flex-col md:flex-row items-center justify-between overflow-visible pt-20 md:pt-0">
       <canvas ref={canvasRef} className="absolute inset-0 z-0" />
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-slate-900/50 z-0" />
 
-      {/* --- Left Text --- */}
-      <div className="relative z-10 md:w-1/2 px-8 text-left space-y-6">
-        <div>
-          <h1 className="text-6xl md:text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 tracking-tight animate-gradient">
-            Arya Sadawrate
-          </h1>
-          <div className="w-20 h-1 bg-gradient-to-r from-cyan-500 to-blue-500 mt-2 rounded-full" />
-        </div>
+  {/* --- Left Text --- */}
+  <div className="relative z-10 md:w-1/2 px-8 text-left space-y-6 pb-6 md:pb-0 min-h-[6rem]">
+    <div>
+    <h1 className="text-6xl md:text-7xl font-bold text-transparent bg-clip-text
+            bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600
+            tracking-tight animate-gradient mb-6 md:mb-3 leading-[1.3] md:leading-[1.2] pb-2">
+      Arya Sadawrate
+    </h1>
+    </div>
+
 
         <p className="text-cyan-400 text-lg font-mono">AI/ML Student | Developer</p>
 
