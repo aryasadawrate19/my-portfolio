@@ -1,51 +1,42 @@
-import { Code2, Database, Brain, Sparkles, BarChart3, GitBranch, Wrench } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { 
+  SiPython, SiCplusplus, SiMysql, SiPytorch, SiTensorflow, 
+  SiScikitlearn, SiLangchain, SiPandas, SiNumpy, SiPlotly, 
+  SiGit, SiGithub, SiDocker, SiPostman, SiJupyter 
+} from 'react-icons/si';
+import { FaJava, FaDatabase } from 'react-icons/fa';
+import { VscVscode } from "react-icons/vsc"; 
 
-const skillCategories = [
-  {
-    title: 'Programming',
-    icon: Code2,
-    skills: ['C', 'C++', 'Java', 'Python'],
-  },
-  {
-    title: 'Databases',
-    icon: Database,
-    skills: ['MySQL', 'SQLite'],
-  },
-  {
-    title: 'ML & DL',
-    icon: Brain,
-    skills: ['Scikit-learn', 'PyTorch', 'TensorFlow', 'ResNet', 'CNNs'],
-  },
-  {
-    title: 'Generative AI / RAG',
-    icon: Sparkles,
-    skills: ['LangChain', 'FAISS', 'Ollama', 'VectorDBs', 'Gemini'],
-  },
-  {
-    title: 'Data Processing & Viz',
-    icon: BarChart3,
-    skills: ['Pandas', 'NumPy', 'Matplotlib', 'Seaborn', 'Plotly'],
-  },
-  {
-    title: 'Version Control',
-    icon: GitBranch,
-    skills: ['Git', 'GitHub'],
-  },
-  {
-    title: 'Other Tools',
-    icon: Wrench,
-    skills: ['Jupyter', 'VS Code', 'Postman', 'Docker'],
-  },
+const skills = [
+  { name: "Python", icon: SiPython, color: "#3776AB" },
+  { name: "Java", icon: FaJava, color: "#007396" },
+  { name: "C++", icon: SiCplusplus, color: "#00599C" },
+  { name: "PyTorch", icon: SiPytorch, color: "#EE4C2C" },
+  { name: "TensorFlow", icon: SiTensorflow, color: "#FF6F00" },
+  { name: "Scikit-Learn", icon: SiScikitlearn, color: "#F7931E" },
+  { name: "LangChain", icon: SiLangchain, color: "#FFFFFF" },
+  { name: "MySQL", icon: SiMysql, color: "#4479A1" },
+  { name: "Pandas", icon: SiPandas, color: "#150458" },
+  { name: "NumPy", icon: SiNumpy, color: "#013243" },
+  { name: "Plotly", icon: SiPlotly, color: "#3F4F75" },
+  { name: "Git", icon: SiGit, color: "#F05032" },
+  { name: "Docker", icon: SiDocker, color: "#2496ED" },
 ];
 
 export default function Skills() {
   return (
-    <section id="skills" className="py-24 px-6 bg-slate-800 relative overflow-hidden">
+    <section id="skills" className="py-24 px-6 bg-slate-950 relative overflow-hidden">
+        {/* Background blobs */}
       <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-500/10 blur-[120px] rounded-full animate-pulse" />
       <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-cyan-500/10 blur-[120px] rounded-full animate-pulse" style={{ animationDelay: '1s' }} />
 
-      <div className="max-w-6xl mx-auto relative">
-        <div className="text-center mb-16">
+      <div className="max-w-6xl mx-auto relative z-10">
+        <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+        >
           <h2 className="text-5xl font-bold text-white mb-4 font-mono">
             <span className="text-cyan-400">{'<'}</span>
             Skills
@@ -53,64 +44,63 @@ export default function Skills() {
           </h2>
           <div className="w-24 h-1 bg-gradient-to-r from-cyan-500 to-blue-500 mx-auto rounded-full" />
           <p className="text-slate-400 mt-4 max-w-2xl mx-auto">
-            A comprehensive toolkit for building intelligent systems from the ground up
+            The technical arsenal I use to build intelligent systems.
           </p>
-        </div>
+        </motion.div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-          {skillCategories.map((category, index) => {
-            const Icon = category.icon;
+        {/* Grid of Skills */}
+        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6">
+          {skills.map((skill, index) => {
+            const Icon = skill.icon;
             return (
-              <div
+              <motion.div
                 key={index}
-                className="group relative bg-gradient-to-br from-slate-900 to-slate-900/50 border border-slate-700 rounded-xl p-6 hover:border-cyan-500/50 transition-all duration-300 hover:shadow-xl hover:shadow-cyan-500/20 hover:-translate-y-1 backdrop-blur-sm overflow-hidden"
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ delay: index * 0.05 }}
+                viewport={{ once: true }}
+                whileHover={{ y: -5 }}
+                className="group relative bg-slate-900 border border-slate-800 rounded-xl p-6 flex flex-col items-center justify-center gap-4 transition-all duration-300 hover:border-opacity-50 hover:shadow-lg"
+                style={{ 
+                    '--hover-color': skill.color 
+                } as React.CSSProperties}
               >
-                <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/0 to-blue-500/0 group-hover:from-cyan-500/10 group-hover:to-blue-500/5 transition-all duration-300" />
-
-                <div className="relative">
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="p-2.5 bg-gradient-to-br from-cyan-500/20 to-blue-500/20 rounded-lg group-hover:scale-110 transition-transform duration-300">
-                      <Icon className="w-5 h-5 text-cyan-400" />
-                    </div>
-                    <h3 className="text-lg font-semibold text-white group-hover:text-cyan-400 transition-colors">{category.title}</h3>
-                  </div>
-                  <div className="flex flex-wrap gap-2">
-                    {category.skills.map((skill, i) => (
-                      <span
-                        key={i}
-                        className="px-3 py-1.5 text-sm bg-slate-800/70 text-slate-300 rounded-full border border-slate-700 hover:border-cyan-500/50 hover:text-cyan-400 hover:bg-slate-800 transition-all duration-200 cursor-default"
-                      >
-                        {skill}
-                      </span>
-                    ))}
-                  </div>
+                {/* Hover Glow Effect */}
+                <div 
+                    className="absolute inset-0 opacity-0 group-hover:opacity-20 transition-opacity duration-300 rounded-xl bg-[var(--hover-color)] blur-xl" 
+                />
+                
+                <div className="relative z-10 p-3 bg-slate-800/50 rounded-lg group-hover:bg-slate-800 transition-colors">
+                    <Icon className="w-8 h-8 text-slate-400 group-hover:text-[var(--hover-color)] transition-colors duration-300" />
                 </div>
-              </div>
+                
+                <span className="text-slate-300 font-mono text-sm group-hover:text-white transition-colors relative z-10">
+                    {skill.name}
+                </span>
+              </motion.div>
             );
           })}
         </div>
 
-        <div className="relative group bg-gradient-to-r from-slate-900 via-slate-900/95 to-slate-900 border border-slate-700 rounded-xl p-8 hover:border-cyan-500/50 transition-all duration-300 backdrop-blur-sm overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/0 via-cyan-500/5 to-blue-500/0 group-hover:via-cyan-500/10 transition-all duration-300" />
-
-          <div className="relative">
-            <h3 className="text-xl font-semibold text-white mb-4 flex items-center gap-3">
-              <div className="p-2 bg-gradient-to-br from-cyan-500/20 to-blue-500/20 rounded-lg">
-                <Code2 className="w-5 h-5 text-cyan-400" />
-              </div>
-              Software Development
+        {/* Tools Marquee / Smaller list for extra tools */}
+        <div className="mt-16 pt-8 border-t border-slate-800">
+            <h3 className="text-center text-slate-500 font-mono mb-8 text-sm uppercase tracking-widest">
+                Other Tools & Technologies
             </h3>
-            <div className="flex flex-wrap gap-3">
-              {['Object-Oriented Programming', 'Agile Methodologies', 'REST APIs'].map((skill, i) => (
-                <span
-                  key={i}
-                  className="px-4 py-2 text-sm bg-slate-800/70 text-slate-300 rounded-full border border-slate-700 hover:border-cyan-500/50 hover:text-cyan-400 hover:bg-slate-800 transition-all duration-200 cursor-default font-medium"
-                >
-                  {skill}
-                </span>
-              ))}
+            <div className="flex flex-wrap justify-center gap-8 opacity-60 hover:opacity-100 transition-opacity">
+                 {[
+                    { Icon: SiJupyter, name: "Jupyter" },
+                    { Icon: SiPostman, name: "Postman" },
+                    { Icon: VscVscode, name: "VS Code" },
+                    { Icon: SiGithub, name: "GitHub" },
+                    { Icon: FaDatabase, name: "SQLite" },
+                 ].map((tool, i) => (
+                    <div key={i} className="flex items-center gap-2 group cursor-default">
+                        <tool.Icon className="w-5 h-5 group-hover:text-cyan-400 transition-colors" />
+                        <span className="text-sm">{tool.name}</span>
+                    </div>
+                 ))}
             </div>
-          </div>
         </div>
       </div>
     </section>

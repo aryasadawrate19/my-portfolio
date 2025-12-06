@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, ArrowRight, Github, Linkedin } from "lucide-react";
 import Lottie from "lottie-react";
+import { motion } from "framer-motion";
 import devAnimation from "../assets/Developer.json";
 
 export default function Hero() {
@@ -8,8 +9,7 @@ export default function Hero() {
   const lottieRef = useRef<HTMLDivElement>(null);
   const [displayText, setDisplayText] = useState("");
   const fullText =
-    "Building intelligent systems that understand more than they're told.";
-
+    "I make machines smarter — and occasionally myself dumber in the process. Still figuring out who’s learning faster.";
   // ✍️ Typing animation
   useEffect(() => {
     let currentIndex = 0;
@@ -17,11 +17,11 @@ export default function Hero() {
       setDisplayText(fullText.slice(0, currentIndex));
       currentIndex++;
       if (currentIndex > fullText.length) clearInterval(interval);
-    }, 50);
+    }, 40); // Slightly faster typing speed
     return () => clearInterval(interval);
   }, []);
 
-  // 🌌 Particle background
+  // 🌌 Particle background logic
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -67,8 +67,7 @@ export default function Hero() {
         return;
       }
 
-      ctx.fillStyle = "rgba(15, 23, 42, 0.15)";
-      ctx.fillRect(0, 0, window.innerWidth, window.innerHeight);
+      ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
 
       nodes.forEach((node, i) => {
         node.x += node.vx;
@@ -91,7 +90,7 @@ export default function Hero() {
         ctx.beginPath();
         ctx.arc(node.x, node.y, pulseSize, 0, Math.PI * 2);
         const gradient = ctx.createRadialGradient(node.x, node.y, 0, node.x, node.y, pulseSize);
-        gradient.addColorStop(0, "rgba(34, 211, 238, 0.8)");
+        gradient.addColorStop(0, "rgba(34, 211, 238, 0.8)"); // Cyan-400
         gradient.addColorStop(1, "rgba(34, 211, 238, 0)");
         ctx.fillStyle = gradient;
         ctx.fill();
@@ -104,7 +103,7 @@ export default function Hero() {
           const maxDist = 180;
           const maxDist2 = maxDist * maxDist;
           if (dist2 < maxDist2) {
-            const opacity = 0.3 * (1 - dist2 / maxDist2);
+            const opacity = 0.2 * (1 - dist2 / maxDist2);
             ctx.beginPath();
             ctx.moveTo(node.x, node.y);
             ctx.lineTo(other.x, other.y);
@@ -157,13 +156,13 @@ export default function Hero() {
       const { innerWidth, innerHeight } = window;
       const x = (e.clientX - innerWidth / 2) / innerWidth;
       const y = (e.clientY - innerHeight / 2) / innerHeight;
-      tiltX = x * 12; // more responsive
-      tiltY = y * 12;
+      tiltX = x * 15; // Increased tilt slightly
+      tiltY = y * 15;
     };
 
     const animate = () => {
       frame += 0.02;
-      floatY = Math.sin(frame) * 10; // floating motion
+      floatY = Math.sin(frame) * 8; 
 
       el.style.transform = `
         perspective(1000px)
@@ -184,64 +183,107 @@ export default function Hero() {
   }, []);
 
   return (
-    <section className="relative min-h-screen flex flex-col md:flex-row items-center justify-between overflow-hidden pt-20 md:pt-0">
-      <canvas ref={canvasRef} className="absolute inset-0 z-0" />
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-slate-900/50 z-0" />
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16 md:pt-0">
+      {/* Background Canvas */}
+      <canvas ref={canvasRef} className="absolute inset-0 z-0 opacity-80" />
+      
+      {/* Gradient Overlay for better text readability */}
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-slate-950/20 to-slate-950/90 z-0 pointer-events-none" />
 
-      {/* --- Left Text --- */}
-      <div className="relative z-10 md:w-1/2 px-8 text-left space-y-6">
-        <div>
-          <h1 className="text-6xl md:text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 tracking-tight animate-gradient">
-            Arya Sadawrate
-          </h1>
-          <div className="w-20 h-1 bg-gradient-to-r from-cyan-500 to-blue-500 mt-2 rounded-full" />
-        </div>
-
-        <p className="text-cyan-400 text-lg font-mono">AI/ML Student | Developer</p>
-
-        <p className="text-slate-300 text-lg leading-relaxed max-w-xl">
-          {displayText}
-          <span className="inline-block w-0.5 h-6 bg-cyan-400 ml-1 animate-pulse" />
-        </p>
-
-        <div className="flex gap-4 pt-4">
-          <a
-            href="#projects"
-            className="group px-6 py-3 bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-400 hover:to-blue-400 text-slate-900 font-semibold rounded-lg transition-all duration-300 shadow-lg shadow-cyan-500/30 hover:shadow-cyan-500/50 hover:scale-105"
-          >
-            <span className="flex items-center gap-2">
-              View Projects
-              <span className="group-hover:translate-x-1 transition-transform">→</span>
+      <div className="container mx-auto px-6 relative z-10 flex flex-col-reverse md:flex-row items-center justify-between h-full">
+        
+        {/* --- Left Text Content --- */}
+        <motion.div 
+          initial={{ opacity: 0, x: -30 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="md:w-1/2 text-left space-y-6 md:pr-10 mt-12 md:mt-0"
+        >
+          <div className="inline-block px-3 py-1 rounded-full bg-cyan-900/30 border border-cyan-500/30 text-cyan-400 font-mono text-sm mb-2 backdrop-blur-md">
+            👋 Hello, I am
+          </div>
+          
+          <h1 className="text-6xl md:text-7xl font-bold tracking-tight leading-none text-white font-mono">
+            Arya <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 animate-gradient">
+              Sadawrate
             </span>
-          </a>
-          <a
-            href="#contact"
-            className="group px-6 py-3 border-2 border-cyan-500 hover:bg-cyan-500/10 text-cyan-400 font-semibold rounded-lg transition-all duration-300 backdrop-blur-sm hover:scale-105"
-          >
-            Get in Touch
-          </a>
-        </div>
+          </h1>
+
+          <h2 className="text-2xl md:text-3xl text-slate-300 font-light">
+            <span className="font-semibold text-cyan-400">AI/ML Student</span> & Developer
+          </h2>
+
+          <p className="text-slate-400 text-lg leading-relaxed max-w-xl h-14 md:h-auto">
+            {displayText}
+            <span className="inline-block w-0.5 h-6 bg-cyan-400 ml-1 animate-pulse align-middle" />
+          </p>
+
+          <div className="flex flex-col sm:flex-row gap-4 pt-4">
+            <a
+              href="#projects"
+              className="group px-8 py-3.5 bg-cyan-500 hover:bg-cyan-400 text-slate-900 font-bold rounded-lg transition-all duration-300 shadow-[0_0_20px_rgba(6,182,212,0.3)] hover:shadow-[0_0_30px_rgba(6,182,212,0.5)] hover:scale-105 flex items-center justify-center gap-2"
+            >
+              View Work
+              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            </a>
+            
+            <div className="flex gap-4 items-center justify-center sm:justify-start">
+              <a
+                href="https://github.com/aryasadawrate19"
+                target="_blank"
+                rel="noreferrer"
+                className="p-3.5 border border-slate-700 rounded-lg hover:border-cyan-500 hover:bg-slate-800/50 text-slate-300 hover:text-cyan-400 transition-all duration-300 backdrop-blur-sm"
+                aria-label="GitHub"
+              >
+                <Github className="w-5 h-5" />
+              </a>
+              <a
+                href="https://www.linkedin.com/in/arya-sadawrate-894a0a305"
+                target="_blank"
+                rel="noreferrer"
+                className="p-3.5 border border-slate-700 rounded-lg hover:border-blue-500 hover:bg-slate-800/50 text-slate-300 hover:text-blue-400 transition-all duration-300 backdrop-blur-sm"
+                aria-label="LinkedIn"
+              >
+                <Linkedin className="w-5 h-5" />
+              </a>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* --- Right Lottie Animation --- */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1, delay: 0.2 }}
+          ref={lottieRef}
+          className="md:w-1/2 flex justify-center items-center perspective-container will-change-transform"
+          style={{ transformStyle: "preserve-3d" }}
+        >
+          <div className="relative w-[300px] h-[300px] md:w-[500px] md:h-[500px]">
+             {/* Glow effect behind the animation */}
+            <div className="absolute inset-0 bg-cyan-500/20 blur-[100px] rounded-full" />
+            
+            <Lottie
+              animationData={devAnimation}
+              loop={true}
+              className="w-full h-full relative z-10 drop-shadow-2xl"
+            />
+          </div>
+        </motion.div>
       </div>
 
-      {/* --- Right Lottie Animation with tilt and float --- */}
-      <div
-        ref={lottieRef}
-        className="relative z-10 md:w-1/2 flex justify-center items-center px-6 mt-12 md:mt-0 transition-transform duration-300 ease-out will-change-transform"
-        style={{ transformStyle: "preserve-3d" }}
-      >
-        <Lottie
-          animationData={devAnimation}
-          loop={true}
-          className="w-[28rem] h-[28rem] drop-shadow-lg"
-        />
-      </div>
-
-      <a
+      {/* Scroll Indicator */}
+      <motion.a
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 2, duration: 1 }}
         href="#about"
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 text-cyan-400 animate-bounce"
+        className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2 text-slate-500 hover:text-cyan-400 transition-colors"
       >
-        <ChevronDown className="w-8 h-8" />
-      </a>
+        <span className="text-xs font-mono uppercase tracking-widest">Scroll</span>
+        <ChevronDown className="w-6 h-6 animate-bounce" />
+      </motion.a>
     </section>
   );
 }

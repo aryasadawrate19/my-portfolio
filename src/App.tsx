@@ -7,10 +7,12 @@ import Skills from './components/Skills';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import Experience from './components/Experience';
+import MouseFollower from './components/MouseFollower';
 
 function App() {
   return (
-    <div className="min-h-screen bg-slate-950">
+    <div className="min-h-screen bg-slate-950 cursor-none">
+      <MouseFollower />
       <Navigation />
       <Hero />
       <About />
