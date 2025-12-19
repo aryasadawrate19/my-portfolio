@@ -1,3 +1,4 @@
+// src/components/Navigation.tsx
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 
@@ -14,8 +15,7 @@ export default function Navigation() {
   const navLinks = [
     { href: "#about", label: "About" },
     { href: "#projects", label: "Projects" },
-    {href: "#experience", label: "Experience" },
-    { href: "#education", label: "Education" },
+    { href: "#experience", label: "Experience" },
     { href: "#skills", label: "Skills" },
     { href: "#contact", label: "Contact" },
   ];
@@ -24,98 +24,80 @@ export default function Navigation() {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-500 ${
         isScrolled
-          ? "bg-slate-950/95 backdrop-blur-sm border-b border-slate-800"
-          : "bg-transparent"
+          ? "bg-slate-950/80 backdrop-blur-xl border-b border-slate-900 py-4"
+          : "bg-transparent py-8"
       }`}
     >
-      {/* Full-width container for proper edge alignment */}
-      <div className="w-full flex items-center justify-between px-4 md:px-8 py-3">
-        {/* === LEFT: LOGO / NAME === */}
-        <a href="/" className="flex items-center gap-3 group">
-        <img
+      <div className="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between">
+        
+        {/* === LEFT: PHOTO & NAME === */}
+        <a href="/" className="flex items-center gap-4 group">
+          <img
             src="/photo.jpg"
             alt="Arya Sadawrate"
-            className="w-14 h-14 rounded-full object-cover border border-cyan-500/40 shadow-md shadow-cyan-500/40 transition-transform group-hover:scale-105"
-        />
-        <span className="text-slate-100 font-semibold tracking-wide font-mono text-lg group-hover:text-cyan-400 transition-colors">
+            className="w-11 h-11 rounded-sm object-cover border border-slate-800 group-hover:border-cyan-500 transition-all duration-300 shadow-xl shadow-black/50"
+          />
+          <span className="text-white font-bold tracking-tighter text-xl group-hover:text-cyan-400 transition-colors uppercase">
             Arya
-        </span>
+          </span>
         </a>
 
-
-        {/* === RIGHT: NAV LINKS + RESUME BUTTON === */}
-        <div className="flex items-center gap-6">
-          {/* Desktop Links */}
-          <div className="hidden md:flex items-center gap-8">
+        {/* === RIGHT: NAV LINKS + RESUME === */}
+        <div className="hidden md:flex items-center gap-10">
+          <div className="flex gap-8">
             {navLinks.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
-                onClick={handleLinkClick}
-                className="text-slate-300 hover:text-cyan-400 transition-colors font-mono text-sm"
+                className="text-[11px] font-mono text-slate-400 hover:text-white transition-all tracking-[0.2em] uppercase relative group"
               >
                 {link.label}
+                <span className="absolute -bottom-1 left-0 w-0 h-px bg-cyan-500 transition-all group-hover:w-full" />
               </a>
             ))}
-
-            {/* === Resume Button with Glow === */}
-            <a
-              href="/Aarya_Sadawrate_VIT.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-4 py-2 rounded-md border border-cyan-500 text-cyan-400 font-mono text-sm
-                transition-all duration-300
-                hover:text-slate-900
-                hover:bg-cyan-400
-                hover:shadow-[0_0_15px_rgba(34,211,238,0.6)]
-                shadow-[0_0_6px_rgba(34,211,238,0.3)]
-                hover:scale-105"
-            >
-              Resume
-            </a>
           </div>
 
-          {/* Mobile Menu Toggle */}
-          <button
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden p-2 text-slate-300 hover:text-cyan-400 transition-colors"
-            aria-label="Toggle menu"
+          <a
+            href="/Aarya_Sadawrate_VIT.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-6 py-2.5 bg-white text-black font-bold text-[11px] tracking-[0.15em] uppercase hover:bg-cyan-400 transition-all"
           >
-            {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </button>
+            Resume
+          </a>
         </div>
+
+        {/* Mobile Toggle */}
+        <button
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          className="md:hidden p-2 text-slate-400 hover:text-white transition-colors"
+          aria-label="Toggle menu"
+        >
+          {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+        </button>
       </div>
 
       {/* === MOBILE MENU === */}
       {isMobileMenuOpen && (
-        <div className="md:hidden w-full px-4 py-4 border-t border-slate-800 bg-slate-950/90 backdrop-blur-sm">
-          <div className="flex flex-col gap-3">
-            {navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                onClick={handleLinkClick}
-                className="text-slate-300 hover:text-cyan-400 transition-colors font-mono text-sm py-2"
-              >
-                {link.label}
-              </a>
-            ))}
-
-            {/* === Mobile Resume Button with Glow === */}
+        <div className="md:hidden absolute top-full left-0 w-full bg-slate-950 border-b border-slate-900 px-6 py-10 flex flex-col gap-8 animate-in fade-in slide-in-from-top-4 backdrop-blur-3xl">
+          {navLinks.map((link) => (
             <a
-              href="/Aarya_Sadawrate_VIT.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-2 text-cyan-400 border border-cyan-500/40 rounded-md px-4 py-2 text-center
-                hover:bg-cyan-500/10
-                hover:shadow-[0_0_15px_rgba(34,211,238,0.5)]
-                transition-all font-mono text-sm"
+              key={link.href}
+              href={link.href}
+              onClick={handleLinkClick}
+              className="text-sm font-mono text-slate-400 hover:text-cyan-400 tracking-[0.3em] uppercase transition-colors"
             >
-              Resume
+              {link.label}
             </a>
-          </div>
+          ))}
+          <a
+            href="/Aarya_Sadawrate_VIT.pdf"
+            className="text-center py-4 border border-slate-800 text-white font-mono text-xs tracking-widest bg-slate-900/50"
+          >
+            RESUME.PDF
+          </a>
         </div>
       )}
     </nav>

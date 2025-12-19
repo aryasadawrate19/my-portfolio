@@ -5,16 +5,34 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    /* Ensure the default cursor is gone everywhere */
+    cursor: none;
   }
 
   body {
     @apply bg-slate-950 text-slate-100;
+    cursor: none;
+  }
+
+  /* The "Nuclear Option" to kill the default pointer on all interactive bits */
+  a, button, input, textarea, [role="button"], select {
+    cursor: none !important;
   }
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+
+  /* The polished radial fade for your Hero section */
+  .bg-radial-gradient {
+    background: radial-gradient(
+      circle at center,
+      transparent 0%,
+      rgba(2, 6, 23, 0.3) 50%,
+      rgba(2, 6, 23, 1) 100%
+    );
   }
 
   .animate-gradient {

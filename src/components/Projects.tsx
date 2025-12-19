@@ -5,16 +5,15 @@ const projects = [
   {
     title: 'AINux',
     icon: Terminal,
-    description: 'AI-augmented development environment on Debian. Embeds an intelligent agent into the OS to interpret intent, automate workflows, and provide real-time CLI assistance without a GUI.',
+    description: 'AI-augmented development environment on Debian. Embeds an intelligent agent into the OS to interpret intent, automate workflows, and provide real-time CLI assistance.',
     highlights: [
       'Hybrid Arch: Go Core Daemon + PyTorch Agent',
       'High-performance IPC via Unix Domain Sockets',
-      'Modular Go Plugin system for tool integration',
       'Git-based environment state snapshotting',
     ],
-    tags: ['Go', 'Python', 'PyTorch', 'Debian', 'IPC', 'System Design'],
+    tags: ['Go', 'Python', 'PyTorch', 'Debian'],
     github: "https://github.com/aryasadawrate19/AINux-Proto",
-    demo: "#"
+    demo: "https://github.com/aryasadawrate19/AINux-Proto" // Updated to repo if no demo exists
   },
   {
     title: 'OrthoLens',
@@ -23,137 +22,138 @@ const projects = [
     highlights: [
       'Live Camera Feed + ML Inference (PyTorch)',
       'AR Rendering (Unity/WebXR) with Spatial Anchors',
-      'Real-time Condition Detection & Virtual Overlays',
       'Interactive Gesture & Voice Controls',
     ],
-    tags: ['AR', 'Unity', 'PyTorch', 'Computer Vision', 'Medical'],
-    github: "#",
-    demo: "#"
+    tags: ['AR', 'Unity', 'PyTorch', 'CV'],
+    github: "https://github.com/aryasadawrate19/OrthoLens",
+    demo: "https://github.com/aryasadawrate19/OrthoLens"
   },
   {
     title: 'VisionAid',
     icon: Eye,
-    description: 'Offline assistive device for the visually impaired. Fuses computer vision and ultrasonic sensors on a Raspberry Pi to provide navigation, object recognition, and safety alerts.',
+    description: 'Offline assistive device for the visually impaired. Fuses computer vision and ultrasonic sensors on a Raspberry Pi for navigation and object recognition.',
     highlights: [
-      'Edge AI: YOLO (Objects/Currency) + HOG (Faces)',
-      'Offline Speech (Vosk) & Haptic/Audio Feedback',
-      'Multithreaded Sensor Fusion (Camera + Ultrasonic)',
-      'GPS-based Emergency SOS & SMTP Alerting',
+      'Edge AI: YOLO (Objects) + HOG (Faces)',
+      'Offline Speech (Vosk) & Haptic Feedback',
+      'Multithreaded Sensor Fusion',
     ],
-    tags: ['Raspberry Pi', 'YOLO', 'Edge AI', 'IoT', 'Python', 'OpenCV'],
-    github: "#",
-    demo: "#"
-  },
-  {
-    title: 'ReqAuto',
-    icon: Brain,
-    description: 'AI-powered platform to auto-generate and manage software requirements from natural language input.',
-    highlights: [
-      'Local DeepSeek & Llama 3 via Ollama',
-      'NLP-based classification & prioritization',
-      'Contextual accuracy validation',
-    ],
-    tags: ['LangChain', 'Ollama', 'Python', 'RAG'],
-    github: "#", 
-    demo: "#"
+    tags: ['Raspberry Pi', 'YOLO', 'IoT', 'Python'],
+    github: "https://github.com/aryasadawrate19/vision_aid",
+    demo: "https://github.com/aryasadawrate19/vision_aid"
   },
   {
     title: 'VerifyMD',
     icon: Stethoscope,
-    description: 'AI-powered assistant for orthopedic doctors to analyze X-rays with conversational interaction.',
+    description: 'AI-powered assistant for orthopedic doctors to analyze X-rays with conversational interaction and vector-based knowledge retrieval.',
     highlights: [
       'ResNet CNN (~93% accuracy)',
       'Google Gemini + LangChain',
       'FAISS Vector Retrieval',
     ],
     tags: ['PyTorch', 'ResNet', 'Gemini', 'FAISS'],
-    github: "#",
-    demo: "#"
+    github: "https://github.com/aryasadawrate19/VerifyMD",
+    demo: "https://github.com/aryasadawrate19/VerifyMD"
   },
 ];
 
 export default function Projects() {
   return (
-    <section id="projects" className="py-24 px-6 bg-slate-950 relative overflow-hidden">
-        {/* Background Gradients */}
-      <div className="absolute top-20 right-0 w-[500px] h-[500px] bg-blue-600/10 blur-[120px] rounded-full" />
-      <div className="absolute bottom-20 left-0 w-[500px] h-[500px] bg-cyan-500/10 blur-[120px] rounded-full" />
-
+    <section id="projects" className="py-32 px-6 bg-slate-950 relative">
       <div className="max-w-6xl mx-auto relative z-10">
+        
         <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mb-20"
         >
-          <h2 className="text-5xl font-bold text-white mb-4 font-mono">
-            <span className="text-cyan-400">{'<'}</span>
-            Projects
-            <span className="text-cyan-400">{' />'}</span>
+          <h2 className="text-5xl font-bold text-white tracking-tighter font-sans">
+            SELECTED <span className="text-slate-500 text-4xl block md:inline md:ml-2">SYSTEMS_</span>
           </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-cyan-500 to-blue-500 mx-auto rounded-full" />
-          <p className="text-slate-400 mt-4 max-w-2xl mx-auto">
-             From OS-level agents to embedded assistive tech — building intelligent systems that matter.
+          <p className="text-slate-500 mt-4 max-w-2xl mx-auto">
+            From OS-level agents to embedded assistive tech.
           </p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-8">
+        <div className="grid lg:grid-cols-2 gap-10">
           {projects.map((project, index) => {
             const Icon = project.icon;
             return (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.2 }}
+                transition={{ delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className="group relative bg-slate-900/40 border border-slate-800 hover:border-cyan-500/50 rounded-2xl p-8 transition-all duration-300 hover:shadow-2xl hover:shadow-cyan-500/10 backdrop-blur-md flex flex-col"
+                className="group relative bg-slate-900/20 border border-slate-800 rounded-sm overflow-hidden flex flex-col hover:border-slate-600 transition-colors"
               >
-                {/* Hover Gradient Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl pointer-events-none" />
+                <div className="flex items-center justify-between px-4 py-3 bg-slate-900/50 border-b border-slate-800">
+                  <div className="flex gap-1.5">
+                    <div className="w-2 h-2 rounded-full bg-slate-800 group-hover:bg-red-500/50 transition-colors" />
+                    <div className="w-2 h-2 rounded-full bg-slate-800 group-hover:bg-amber-500/50 transition-colors" />
+                    <div className="w-2 h-2 rounded-full bg-slate-800 group-hover:bg-emerald-500/50 transition-colors" />
+                  </div>
+                  <span className="text-[10px] font-mono text-slate-600 uppercase tracking-widest">
+                    {project.title}.exe
+                  </span>
+                </div>
 
-                <div className="relative z-10 flex flex-col h-full">
-                    <div className="flex justify-between items-start mb-6">
-                        <div className="p-3 bg-slate-800 rounded-lg border border-slate-700 group-hover:border-cyan-500/30 group-hover:scale-110 transition-all duration-300">
-                            <Icon className="w-8 h-8 text-cyan-400" />
-                        </div>
-                        <div className="flex gap-3">
-                            <a href={project.github} target="_blank" rel="noreferrer" className="p-2 text-slate-400 hover:text-white hover:bg-slate-800 rounded-full transition-all">
-                                <Github className="w-5 h-5" />
-                            </a>
-                            <a href={project.demo} className="p-2 text-slate-400 hover:text-white hover:bg-slate-800 rounded-full transition-all">
-                                <ExternalLink className="w-5 h-5" />
-                            </a>
-                        </div>
+                <div className="p-8 flex-grow">
+                  <div className="flex justify-between items-start mb-8">
+                    <div className="p-3 bg-slate-800/50 border border-slate-700 rounded-sm">
+                      <Icon className="w-6 h-6 text-cyan-500" />
                     </div>
+                    <div className="flex gap-4">
+                      {/* FIXED GITHUB LINK */}
+                      <a 
+                        href={project.github} 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        className="text-slate-500 hover:text-white transition-colors p-1"
+                        onClick={(e) => e.stopPropagation()} // Prevents event bubbling
+                      >
+                        <Github className="w-5 h-5" />
+                      </a>
+                      {/* FIXED DEMO LINK */}
+                      <a 
+                        href={project.demo} 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        className="text-slate-500 hover:text-white transition-colors p-1"
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        <ExternalLink className="w-5 h-5" />
+                      </a>
+                    </div>
+                  </div>
 
-                  <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-cyan-400 transition-colors">
+                  <h3 className="text-2xl font-bold text-white mb-4 tracking-tight">
                     {project.title}
                   </h3>
 
-                  <p className="text-slate-300 mb-6 leading-relaxed flex-grow">
+                  <p className="text-slate-400 text-sm leading-relaxed mb-8 h-auto lg:h-20">
                     {project.description}
                   </p>
 
-                  <ul className="space-y-2 mb-6">
+                  <div className="space-y-2 mb-8">
                     {project.highlights.map((h, i) => (
-                      <li key={i} className="flex items-center gap-2 text-sm text-slate-400">
-                        <span className="w-1.5 h-1.5 bg-cyan-500 rounded-full" />
+                      <div key={i} className="flex items-center gap-3 text-[11px] font-mono text-slate-500 uppercase tracking-tight">
+                        <span className="w-1 bg-cyan-500 h-1" />
                         {h}
-                      </li>
-                    ))}
-                  </ul>
-
-                  <div className="flex flex-wrap gap-2 pt-4 border-t border-slate-800 mt-auto">
-                    {project.tags.map((tag, i) => (
-                      <span
-                        key={i}
-                        className="px-3 py-1 text-xs font-mono bg-cyan-950/30 text-cyan-300 rounded-full border border-cyan-900/50"
-                      >
-                        {tag}
-                      </span>
+                      </div>
                     ))}
                   </div>
+                </div>
+
+                <div className="px-8 py-4 bg-slate-900/30 border-t border-slate-800 flex flex-wrap gap-2">
+                  {project.tags.map((tag, i) => (
+                    <span
+                      key={i}
+                      className="text-[9px] font-mono text-slate-500 border border-slate-800 px-2 py-0.5 rounded-sm uppercase tracking-widest group-hover:border-cyan-500/30 group-hover:text-cyan-400 transition-colors"
+                    >
+                      {tag}
+                    </span>
+                  ))}
                 </div>
               </motion.div>
             );

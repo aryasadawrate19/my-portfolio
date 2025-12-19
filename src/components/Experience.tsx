@@ -1,66 +1,63 @@
-import { Briefcase, Calendar } from "lucide-react";
+// src/components/Experience.tsx
+import { Calendar, Terminal } from "lucide-react";
 import { motion } from "framer-motion";
 
 const experiences = [
   {
     company: "Nataraj Services",
-    role: "Summer Intern",
+    role: "Software Engineering Intern",
     period: "Oct 2023 – Dec 2023",
-    description: "Developed a comprehensive payroll system for government employees using C# and .NET 3.5. Scaled the solution across Chhatrapati Sambhajinagar ZP head offices.",
+    description: "Architected a payroll system for municipal government infrastructure using C# and .NET. Managed full-cycle deployment across regional head offices.",
     tech: ["C#", ".NET", "SQL"],
   },
-  // Add more experiences here as you get them
 ];
 
 export default function Experience() {
   return (
-    <section id="experience" className="py-20 px-6 bg-slate-950 relative overflow-hidden">
-      <div className="max-w-4xl mx-auto relative z-10">
+    <section id="experience" className="py-32 px-6 bg-slate-950">
+      <div className="max-w-4xl mx-auto">
         <motion.h2 
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, x: -20 }}
+          whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
-          className="text-4xl font-bold text-white mb-16 font-mono text-center"
+          className="text-5xl font-bold text-white mb-16 tracking-tighter"
         >
-          <span className="text-cyan-400">{"<"}</span>
-          Experience
-          <span className="text-cyan-400">{"/>"}</span>
+          EXPERIENCE<span className="text-slate-500">_LOG</span>
         </motion.h2>
 
-        <div className="relative border-l border-slate-800 ml-4 md:ml-10 space-y-12">
+        <div className="relative border-l border-slate-800 ml-4 space-y-16">
           {experiences.map((exp, index) => (
             <motion.div 
               key={index}
-              initial={{ opacity: 0, x: -20 }}
+              initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
-              transition={{ delay: index * 0.2 }}
-              className="relative pl-8 md:pl-12 group"
+              viewport={{ once: true }}
+              className="relative pl-10 group"
             >
-              {/* Timeline Dot */}
-              <div className="absolute -left-[5px] top-2 w-3 h-3 rounded-full bg-cyan-500 shadow-[0_0_10px_rgba(6,182,212,0.6)] group-hover:scale-125 transition-transform" />
+              {/* Git-style Branch Node */}
+              <div className="absolute -left-[9px] top-2 w-4 h-4 rounded-full bg-slate-950 border-2 border-slate-700 group-hover:border-cyan-500 transition-colors duration-500" />
               
-              <div className="bg-slate-900/50 border border-slate-800 p-6 rounded-xl hover:border-cyan-500/30 transition-all duration-300 backdrop-blur-sm group-hover:shadow-lg group-hover:shadow-cyan-500/5">
-                <div className="flex flex-col md:flex-row md:items-center justify-between mb-4 gap-2">
-                  <h3 className="text-xl font-bold text-white flex items-center gap-2">
-                    {exp.role} <span className="text-cyan-400">@ {exp.company}</span>
+              <div className="flex flex-col md:flex-row md:items-center justify-between mb-4 gap-4">
+                <div>
+                  <h3 className="text-2xl font-bold text-white tracking-tight">
+                    {exp.role} <span className="text-cyan-500 font-mono text-lg">@ {exp.company}</span>
                   </h3>
-                  <div className="flex items-center gap-2 text-sm text-slate-400 bg-slate-800/50 px-3 py-1 rounded-full w-fit">
-                    <Calendar className="w-4 h-4" />
-                    {exp.period}
+                  <div className="flex items-center gap-2 text-slate-500 font-mono text-[10px] mt-1 uppercase tracking-widest">
+                    <Calendar className="w-3 h-3" /> {exp.period}
                   </div>
                 </div>
-                
-                <p className="text-slate-300 leading-relaxed mb-4">
-                  {exp.description}
-                </p>
+              </div>
+              
+              <p className="text-slate-400 font-light leading-relaxed max-w-2xl mb-6">
+                {exp.description}
+              </p>
 
-                <div className="flex gap-2 flex-wrap">
-                  {exp.tech.map((t, i) => (
-                    <span key={i} className="text-xs font-mono text-cyan-300 bg-cyan-900/20 px-2 py-1 rounded border border-cyan-500/20">
-                      {t}
-                    </span>
-                  ))}
-                </div>
+              <div className="flex gap-3 flex-wrap">
+                {exp.tech.map((t) => (
+                  <span key={t} className="text-[10px] font-mono text-slate-500 border border-slate-800 px-2 py-1 rounded-sm uppercase group-hover:text-cyan-400 group-hover:border-cyan-500/30 transition-all">
+                    {t}
+                  </span>
+                ))}
               </div>
             </motion.div>
           ))}
