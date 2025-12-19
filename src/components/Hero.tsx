@@ -10,7 +10,6 @@ export default function Hero() {
   const [displayText, setDisplayText] = useState("");
   const fullText = "I build intelligent systems that sit at the intersection of clean math and messy human behaviour.";
 
-  // ✍️ Typing animation
   useEffect(() => {
     let currentIndex = 0;
     const interval = setInterval(() => {
@@ -21,7 +20,6 @@ export default function Hero() {
     return () => clearInterval(interval);
   }, []);
 
-  // 🌌 REINSTATED: Original Sophisticated Particle logic
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -41,7 +39,8 @@ export default function Hero() {
 
     setCanvasSize();
 
-    const nodeCount = 45;
+    // Reduce node count on mobile for performance
+    const nodeCount = window.innerWidth < 768 ? 25 : 45;
     const nodes = Array.from({ length: nodeCount }, () => ({
       x: Math.random() * window.innerWidth,
       y: Math.random() * window.innerHeight,
@@ -52,23 +51,16 @@ export default function Hero() {
 
     let mouseX = window.innerWidth / 2;
     let mouseY = window.innerHeight / 2;
+    
     const onPointerMove = (e: PointerEvent) => {
       mouseX = e.clientX;
       mouseY = e.clientY;
     };
-    canvas.addEventListener("pointermove", onPointerMove);
+    window.addEventListener("pointermove", onPointerMove);
 
     let rafId = 0;
-    let isVisible = document.visibilityState === "visible";
-
     const animateParticles = () => {
-      if (!isVisible) {
-        rafId = requestAnimationFrame(animateParticles);
-        return;
-      }
-
       ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
-
       nodes.forEach((node, i) => {
         node.x += node.vx;
         node.y += node.vy;
@@ -78,8 +70,7 @@ export default function Hero() {
         const dym = mouseY - node.y;
         const distToMouse2 = dxm * dxm + dym * dym;
 
-        // Mouse repulsion
-        if (distToMouse2 < 200 * 200) {
+        if (distToMouse2 < 150 * 150) {
           node.x -= dxm * 0.003;
           node.y -= dym * 0.003;
         }
@@ -90,10 +81,7 @@ export default function Hero() {
         const pulseSize = 2 + Math.sin(node.pulse) * 1.5;
         ctx.beginPath();
         ctx.arc(node.x, node.y, pulseSize, 0, Math.PI * 2);
-        const gradient = ctx.createRadialGradient(node.x, node.y, 0, node.x, node.y, pulseSize);
-        gradient.addColorStop(0, "rgba(34, 211, 238, 0.8)");
-        gradient.addColorStop(1, "rgba(34, 211, 238, 0)");
-        ctx.fillStyle = gradient;
+        ctx.fillStyle = "rgba(34, 211, 238, 0.4)";
         ctx.fill();
 
         for (let j = i + 1; j < nodes.length; j++) {
@@ -101,135 +89,73 @@ export default function Hero() {
           const dx = node.x - other.x;
           const dy = node.y - other.y;
           const dist2 = dx * dx + dy * dy;
-          const maxDist = 180;
-          const maxDist2 = maxDist * maxDist;
-          if (dist2 < maxDist2) {
-            const opacity = 0.2 * (1 - dist2 / maxDist2);
+          const maxDist = 150;
+          if (dist2 < maxDist * maxDist) {
+            const opacity = 0.15 * (1 - dist2 / (maxDist * maxDist));
             ctx.beginPath();
             ctx.moveTo(node.x, node.y);
             ctx.lineTo(other.x, other.y);
             ctx.strokeStyle = `rgba(34, 211, 238, ${opacity})`;
-            ctx.lineWidth = 1;
             ctx.stroke();
           }
         }
       });
-
       rafId = requestAnimationFrame(animateParticles);
     };
 
-    const onVisibility = () => { isVisible = document.visibilityState === "visible"; };
-    document.addEventListener("visibilitychange", onVisibility);
     rafId = requestAnimationFrame(animateParticles);
-
-    const handleResize = () => {
-      setCanvasSize();
-      nodes.forEach((n) => {
-        n.x = Math.min(n.x, window.innerWidth);
-        n.y = Math.min(n.y, window.innerHeight);
-      });
-    };
-
-    window.addEventListener("resize", handleResize);
+    window.addEventListener("resize", setCanvasSize);
 
     return () => {
       cancelAnimationFrame(rafId);
-      canvas.removeEventListener("pointermove", onPointerMove);
-      window.removeEventListener("resize", handleResize);
-      document.removeEventListener("visibilitychange", onVisibility);
-    };
-  }, []);
-
-  // 🌀 REINSTATED: Original Tilt and Floating loop for Lottie
-  useEffect(() => {
-    const el = lottieRef.current;
-    if (!el) return;
-
-    let tiltX = 0;
-    let tiltY = 0;
-    let floatY = 0;
-    let frame = 0;
-
-    const handleMouseMove = (e: MouseEvent) => {
-      const { innerWidth, innerHeight } = window;
-      const x = (e.clientX - innerWidth / 2) / innerWidth;
-      const y = (e.clientY - innerHeight / 2) / innerHeight;
-      tiltX = x * 15;
-      tiltY = y * 15;
-    };
-
-    const animateLottie = () => {
-      frame += 0.02;
-      floatY = Math.sin(frame) * 10; 
-
-      el.style.transform = `
-        perspective(1000px)
-        rotateX(${tiltY}deg)
-        rotateY(${tiltX}deg)
-        translateY(${floatY}px)
-      `;
-      requestAnimationFrame(animateLottie);
-    };
-
-    window.addEventListener("mousemove", handleMouseMove);
-    const rafId = requestAnimationFrame(animateLottie);
-
-    return () => {
-      window.removeEventListener("mousemove", handleMouseMove);
-      cancelAnimationFrame(rafId);
+      window.removeEventListener("pointermove", onPointerMove);
+      window.removeEventListener("resize", setCanvasSize);
     };
   }, []);
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-slate-950 pt-20">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-slate-950 pt-24 pb-12">
+      <canvas ref={canvasRef} className="absolute inset-0 z-0 opacity-60" />
       
-      {/* 1. The Particle Web Canvas (Neural Network) */}
-      <canvas ref={canvasRef} className="absolute inset-0 z-0 opacity-80" />
-
-      {/* 2. The Blueprint Grid Overlay */}
-      <div 
-        className="absolute inset-0 z-0 opacity-[0.12]" 
+      <div className="absolute inset-0 z-0 opacity-[0.08]" 
         style={{ 
           backgroundImage: `linear-gradient(to right, #1e293b 1px, transparent 1px), linear-gradient(to bottom, #1e293b 1px, transparent 1px)`,
-          backgroundSize: '45px 45px' 
+          backgroundSize: '40px 40px' 
         }} 
       />
       
-      {/* 3. Vignette Fade for Readability */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_transparent_0%,_#020617_95%)] z-0 pointer-events-none" />
-
-      <div className="container mx-auto px-6 relative z-10 flex flex-col md:flex-row items-center justify-between">
+      <div className="container mx-auto px-6 relative z-10 flex flex-col md:flex-row items-center justify-between gap-12">
         
         {/* --- LEFT: Content --- */}
         <motion.div 
-          initial={{ opacity: 0, x: -30 }}
-          animate={{ opacity: 1, x: 0 }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="md:w-1/2 text-left"
+          className="w-full md:w-1/2 text-center md:text-left order-2 md:order-1"
         >
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-900/50 border border-slate-800 text-slate-400 font-mono text-xs mb-6 backdrop-blur-sm uppercase tracking-widest">
-            <span className="flex h-2 w-2 rounded-full bg-cyan-500 animate-pulse" />
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-900/50 border border-slate-800 text-slate-400 font-mono text-[10px] mb-6 backdrop-blur-sm uppercase tracking-widest">
+            <span className="flex h-1.5 w-1.5 rounded-full bg-cyan-500 animate-pulse" />
             System Online
           </div>
 
-          <h1 className="text-6xl md:text-[5.5rem] font-bold tracking-tighter leading-[0.85] text-white uppercase">
-            ARYA <br />
+          <h1 className="text-5xl sm:text-6xl lg:text-[5.5rem] font-bold tracking-tighter leading-[1.1] md:leading-[0.85] text-white uppercase">
+            ARYA <br className="hidden md:block" />
             <span className="text-slate-500">SADAWRATE</span>
           </h1>
 
-          <div className="mt-8 space-y-4">
-            <h2 className="text-xl md:text-2xl text-cyan-400 font-mono flex items-center gap-3">
-              <span className="h-px w-8 bg-cyan-500/50" />
+          <div className="mt-6 md:mt-8 space-y-4">
+            <h2 className="text-lg md:text-2xl text-cyan-400 font-mono flex items-center justify-center md:justify-start gap-3">
+              <span className="hidden md:block h-px w-8 bg-cyan-500/50" />
               AI/ML Engineer
             </h2>
-            <p className="text-slate-400 text-lg leading-relaxed max-w-md font-light min-h-[60px]">
+            <p className="text-slate-400 text-base md:text-lg leading-relaxed max-w-md mx-auto md:mx-0 font-light min-h-[80px] md:min-h-[60px]">
               {displayText}
-              <span className="inline-block w-1.5 h-5 bg-cyan-400 ml-1 animate-pulse align-middle" />
+              <span className="inline-block w-1 h-4 bg-cyan-400 ml-1 animate-pulse" />
             </p>
           </div>
 
-          <div className="mt-10 flex flex-wrap gap-4">
-            <a href="#projects" className="px-8 py-4 bg-white text-black font-bold text-xs tracking-[0.2em] uppercase hover:bg-cyan-400 transition-all flex items-center gap-2">
+          <div className="mt-10 flex flex-wrap justify-center md:justify-start gap-4">
+            <a href="#projects" className="w-full sm:w-auto px-8 py-4 bg-white text-black font-bold text-[10px] tracking-[0.2em] uppercase hover:bg-cyan-400 transition-all flex items-center justify-center gap-2">
               View Work <ArrowRight className="w-4 h-4" />
             </a>
             <div className="flex gap-2">
@@ -245,18 +171,14 @@ export default function Hero() {
 
         {/* --- RIGHT: 3D Lottie Content --- */}
         <motion.div
-          ref={lottieRef}
           initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1.15 }}
+          animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1 }}
-          className="md:w-1/2 flex justify-center mt-16 md:mt-0 relative will-change-transform"
-          style={{ transformStyle: "preserve-3d" }}
+          className="w-full md:w-1/2 flex justify-center order-1 md:order-2"
         >
-          {/* Cyan Glow */}
-          <div className="absolute w-[400px] h-[400px] bg-cyan-500/10 blur-[130px] rounded-full" />
-          
-          <div className="w-full max-w-[580px] relative z-10 filter contrast-[1.05] drop-shadow-2xl">
-            <Lottie animationData={devAnimation} loop={true} className="w-full h-auto" />
+          <div className="w-full max-w-[280px] sm:max-w-[350px] md:max-w-[500px] relative">
+            <div className="absolute inset-0 bg-cyan-500/10 blur-[80px] rounded-full" />
+            <Lottie animationData={devAnimation} loop={true} className="relative z-10 w-full h-auto" />
           </div>
         </motion.div>
       </div>
@@ -264,7 +186,7 @@ export default function Hero() {
       <motion.div 
         animate={{ y: [0, 10, 0] }}
         transition={{ repeat: Infinity, duration: 2 }}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 text-slate-600"
+        className="absolute bottom-6 left-1/2 -translate-x-1/2 text-slate-600 hidden md:block"
       >
         <ChevronDown className="w-6 h-6" />
       </motion.div>

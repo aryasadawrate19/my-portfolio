@@ -5,18 +5,33 @@
 @layer base {
   html {
     scroll-behavior: smooth;
-    /* Ensure the default cursor is gone everywhere */
-    cursor: none;
   }
 
   body {
-    @apply bg-slate-950 text-slate-100;
-    cursor: none;
+    @apply bg-slate-950 text-slate-100 antialiased;
   }
 
-  /* The "Nuclear Option" to kill the default pointer on all interactive bits */
-  a, button, input, textarea, [role="button"], select {
-    cursor: none !important;
+  /* V1.0.5 RESPONSIVE CURSOR LOGIC:
+     Only hide the system cursor if the device has a fine pointer (Mouse).
+     If it's a touch device (Coarse), we restore the default pointer.
+  */
+  @media (pointer: fine) {
+    html, body, a, button, input, textarea, [role="button"], select {
+      cursor: none !important;
+    }
+  }
+
+  @media (pointer: coarse) {
+    html, body {
+      cursor: auto !important;
+    }
+    a, button {
+      cursor: pointer !important;
+    }
+    /* Prevents horizontal overflow on smaller screens */
+    body {
+      overflow-x: hidden;
+    }
   }
 }
 
@@ -25,7 +40,7 @@
     text-wrap: balance;
   }
 
-  /* The polished radial fade for your Hero section */
+  /* Polished radial fade for Hero section */
   .bg-radial-gradient {
     background: radial-gradient(
       circle at center,
@@ -35,6 +50,7 @@
     );
   }
 
+  /* Animation for decorative gradients */
   .animate-gradient {
     background-size: 200% 200%;
     animation: gradient 4s ease infinite;
@@ -47,5 +63,29 @@
     50% {
       background-position: 100% 50%;
     }
+  }
+
+  /* Smooth reveal for mobile menu */
+  .animate-in {
+    animation-duration: 300ms;
+    animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    animation-fill-mode: forwards;
+  }
+}
+
+/* Custom scrollbar for that "System" feel (Desktop only) */
+@media (pointer: fine) {
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #020617;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #1e293b;
+    border-radius: 10px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #22d3ee;
   }
 }

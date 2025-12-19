@@ -1,4 +1,3 @@
-// src/components/Footer.tsx
 import { Github, Linkedin } from 'lucide-react'; 
 
 export default function Footer() {
@@ -20,7 +19,6 @@ export default function Footer() {
     { 
       label: 'X / Twitter', 
       href: 'https://x.com/CalmChor12', 
-      // Using custom SVG path for the actual X branding
       icon: (
         <svg 
           viewBox="0 0 24 24" 
@@ -36,23 +34,23 @@ export default function Footer() {
 
   return (
     <footer className="py-12 px-6 bg-slate-950 border-t border-slate-900 font-sans">
-      <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+      <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-10 md:gap-8">
         
         {/* === BRANDING & SYSTEM LOGS === */}
-        <div className="text-center md:text-left">
-          <div className="flex items-center justify-center md:justify-start gap-2 mb-2">
-            <div className="h-1 w-1 bg-cyan-500" />
+        <div className="text-center md:text-left order-2 md:order-1">
+          <div className="flex items-center justify-center md:justify-start gap-2 mb-3">
+            <div className="h-1.5 w-1.5 bg-cyan-500 animate-pulse" />
             <p className="text-slate-500 text-[10px] font-mono uppercase tracking-[0.3em]">
-              &copy; {currentYear} Arya Sadawrate // Build_v1.0.4
+              &copy; {currentYear} Arya Sadawrate // Build_v1.0.5
             </p>
           </div>
-          <p className="text-slate-700 text-[9px] font-mono uppercase tracking-widest ml-3 italic">
+          <p className="text-slate-700 text-[9px] font-mono uppercase tracking-widest italic max-w-[250px] md:max-w-none mx-auto md:mx-0">
             Powered by caffeine and mild existential dread.
           </p>
         </div>
         
         {/* === SOCIAL UPLINKS === */}
-        <div className="flex gap-10">
+        <div className="flex flex-wrap justify-center gap-8 md:gap-10 order-1 md:order-2">
           {socialLinks.map((platform) => (
             <a 
               key={platform.label} 
@@ -64,7 +62,7 @@ export default function Footer() {
               <div className={`text-slate-600 ${platform.hoverColor} transition-all duration-300 transform group-hover:scale-110`}>
                 {platform.icon}
               </div>
-              <span className="text-slate-600 group-hover:text-slate-200 text-[9px] font-mono uppercase tracking-[0.2em] transition-colors">
+              <span className="text-slate-600 group-hover:text-slate-200 text-[8px] md:text-[9px] font-mono uppercase tracking-[0.2em] transition-colors">
                 {platform.label}
               </span>
             </a>
@@ -74,7 +72,7 @@ export default function Footer() {
       </div>
       
       {/* FINAL SYSTEM TERMINAL LINE */}
-      <div className="mt-12 flex justify-center opacity-10">
+      <div className="mt-12 flex justify-center opacity-10 px-4">
         <div className="h-px w-full max-w-md bg-gradient-to-r from-transparent via-cyan-500 to-transparent" />
       </div>
     </footer>
