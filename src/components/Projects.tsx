@@ -54,6 +54,20 @@ const projects = [
     github: "https://github.com/aryasadawrate19/VerifyMD",
     demo: "https://github.com/aryasadawrate19/VerifyMD"
   },
+  {
+    title: 'Vector Database Optimization System for LLM Retrieval Pipelines',
+    icon: Terminal,
+    description: 'End-to-end system for optimizing vector database performance in large language model retrieval pipelines through systematic benchmarking and parameter tuning.',
+    highlights: [
+      'HNSW Index Optimization for LLM Workloads',
+      'Exact Search Baseline vs Approximate ANN Evaluation',
+      'Latency, Recall, and Throughput Tradeoff Modeling',
+    ],
+    tags: ['Weaviate', 'HNSW', 'Vector Databases', 'LLM', 'Python'],
+    github: 'https://github.com/aryasadawrate19/Vector-Database-Optimization-for-LLM-Applications',
+    demo: 'https://github.com/aryasadawrate19/Vector-Database-Optimization-for-LLM-Applications',
+  }
+
 ];
 
 export default function Projects() {

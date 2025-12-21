@@ -103,7 +103,7 @@ export default function About() {
             className="bg-slate-900/20 border border-slate-800 p-6 md:p-8 rounded-sm flex items-center justify-between group hover:border-emerald-500/30 transition-all"
           >
              <div>
-                <h3 className="text-3xl md:text-4xl font-bold text-white tracking-tighter">04+</h3>
+                <h3 className="text-3xl md:text-4xl font-bold text-white tracking-tighter">5+</h3>
                 <p className="text-slate-500 font-mono text-[10px] uppercase tracking-widest mt-1">Deployments</p>
              </div>
              <div className="w-10 h-10 md:w-12 md:h-12 bg-slate-800 rounded-sm flex items-center justify-center">
