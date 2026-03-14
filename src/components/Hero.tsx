@@ -3,6 +3,7 @@ import { ChevronDown, ArrowRight, Github, Linkedin } from "lucide-react";
 import { motion } from "framer-motion";
 import AvatarParticles from "./AvatarParticles";
 /*import AvatarBinary from "./AvatarBinary";*/
+import QuestionHUD from "./AIAssistant/QuestionHUD";
 
 export default function Hero() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -113,6 +114,19 @@ export default function Hero() {
     };
   }, []);
 
+  async function askAssistant(question: string) {
+    const res = await fetch("http://localhost:3001/api/ask", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ question }),
+    });
+
+    const data = await res.json();
+    console.log(data.answer);
+  }
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-slate-950 pt-24 pb-12">
       <canvas ref={canvasRef} className="absolute inset-0 z-0 opacity-60" />
@@ -187,11 +201,15 @@ export default function Hero() {
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1 }}
-          className="w-full md:w-1/2 flex justify-center order-1 md:order-2"
+          className="w-full md:w-1/2 flex flex-col items-center order-1 md:order-2"
         >
           <div className="w-full max-w-[400px] relative">
             <div className="absolute inset-0 bg-cyan-500/10 blur-[80px] rounded-full" />
             <AvatarParticles />
+          </div>
+
+          <div className="mt-8 w-full max-w-[420px] md:translate-x-9">
+            <QuestionHUD onAsk={askAssistant} />
           </div>
         </motion.div>
       </div>
