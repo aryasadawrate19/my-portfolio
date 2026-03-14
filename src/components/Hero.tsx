@@ -1,14 +1,14 @@
 import { useEffect, useRef, useState } from "react";
 import { ChevronDown, ArrowRight, Github, Linkedin } from "lucide-react";
-import Lottie from "lottie-react";
 import { motion } from "framer-motion";
-import devAnimation from "../assets/Developer.json";
+import AvatarParticles from "./AvatarParticles";
+/*import AvatarBinary from "./AvatarBinary";*/
 
 export default function Hero() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const lottieRef = useRef<HTMLDivElement>(null);
   const [displayText, setDisplayText] = useState("");
-  const fullText = "I build intelligent systems that sit at the intersection of clean math and messy human behaviour.";
+  const fullText =
+    "I build intelligent systems that sit at the intersection of clean math and messy human behaviour.";
 
   useEffect(() => {
     let currentIndex = 0;
@@ -51,7 +51,7 @@ export default function Hero() {
 
     let mouseX = window.innerWidth / 2;
     let mouseY = window.innerHeight / 2;
-    
+
     const onPointerMove = (e: PointerEvent) => {
       mouseX = e.clientX;
       mouseY = e.clientY;
@@ -116,18 +116,18 @@ export default function Hero() {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-slate-950 pt-24 pb-12">
       <canvas ref={canvasRef} className="absolute inset-0 z-0 opacity-60" />
-      
-      <div className="absolute inset-0 z-0 opacity-[0.08]" 
-        style={{ 
+
+      <div
+        className="absolute inset-0 z-0 opacity-[0.08]"
+        style={{
           backgroundImage: `linear-gradient(to right, #1e293b 1px, transparent 1px), linear-gradient(to bottom, #1e293b 1px, transparent 1px)`,
-          backgroundSize: '40px 40px' 
-        }} 
+          backgroundSize: "40px 40px",
+        }}
       />
-      
+
       <div className="container mx-auto px-6 relative z-10 flex flex-col md:flex-row items-center justify-between gap-12">
-        
         {/* --- LEFT: Content --- */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
@@ -155,35 +155,48 @@ export default function Hero() {
           </div>
 
           <div className="mt-10 flex flex-wrap justify-center md:justify-start gap-4">
-            <a href="#projects" className="w-full sm:w-auto px-8 py-4 bg-white text-black font-bold text-[10px] tracking-[0.2em] uppercase hover:bg-cyan-400 transition-all flex items-center justify-center gap-2">
+            <a
+              href="#projects"
+              className="w-full sm:w-auto px-8 py-4 bg-white text-black font-bold text-[10px] tracking-[0.2em] uppercase hover:bg-cyan-400 transition-all flex items-center justify-center gap-2"
+            >
               View Work <ArrowRight className="w-4 h-4" />
             </a>
             <div className="flex gap-2">
-              <a href="https://github.com/aryasadawrate19" target="_blank" rel="noreferrer" className="p-4 border border-slate-800 text-slate-400 hover:text-white transition-all backdrop-blur-sm">
+              <a
+                href="https://github.com/aryasadawrate19"
+                target="_blank"
+                rel="noreferrer"
+                className="p-4 border border-slate-800 text-slate-400 hover:text-white transition-all backdrop-blur-sm"
+              >
                 <Github className="w-5 h-5" />
               </a>
-              <a href="https://www.linkedin.com/in/arya-sadawrate-894a0a305" target="_blank" rel="noreferrer" className="p-4 border border-slate-800 text-slate-400 hover:text-white transition-all backdrop-blur-sm">
+              <a
+                href="https://www.linkedin.com/in/arya-sadawrate-894a0a305"
+                target="_blank"
+                rel="noreferrer"
+                className="p-4 border border-slate-800 text-slate-400 hover:text-white transition-all backdrop-blur-sm"
+              >
                 <Linkedin className="w-5 h-5" />
               </a>
             </div>
           </div>
         </motion.div>
 
-        {/* --- RIGHT: 3D Lottie Content --- */}
+        {/* --- RIGHT: 3D Avatar Particles --- */}
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1 }}
           className="w-full md:w-1/2 flex justify-center order-1 md:order-2"
         >
-          <div className="w-full max-w-[280px] sm:max-w-[350px] md:max-w-[500px] relative">
+          <div className="w-full max-w-[400px] relative">
             <div className="absolute inset-0 bg-cyan-500/10 blur-[80px] rounded-full" />
-            <Lottie animationData={devAnimation} loop={true} className="relative z-10 w-full h-auto" />
+            <AvatarParticles />
           </div>
         </motion.div>
       </div>
 
-      <motion.div 
+      <motion.div
         animate={{ y: [0, 10, 0] }}
         transition={{ repeat: Infinity, duration: 2 }}
         className="absolute bottom-6 left-1/2 -translate-x-1/2 text-slate-600 hidden md:block"
