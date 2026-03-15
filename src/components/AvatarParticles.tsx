@@ -1,7 +1,12 @@
 import { useEffect, useRef } from "react"
 import * as THREE from "three"
 
-export default function AvatarParticles() {
+type Props = {
+  state?: "idle" | "thinking" | "speaking"
+  speechEnergy?: number
+}
+
+export default function AvatarParticles({ state = "idle", speechEnergy = 0 }: Props) {
   const mountRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -108,7 +113,7 @@ export default function AvatarParticles() {
     })
 
     const setSize = () => {
-      const size = Math.max(220, Math.min(500, mount.clientWidth || 320))
+      const size = Math.max(220, Math.min(260, mount.clientWidth || 260))
       renderer.setSize(size, size, false)
       camera.aspect = 1
       camera.updateProjectionMatrix()
@@ -265,5 +270,12 @@ export default function AvatarParticles() {
     }
   }, [])
 
-  return <div ref={mountRef} className="relative z-10 w-full aspect-square" />
+  return (
+    <div
+      ref={mountRef}
+      className="relative z-10 w-full aspect-square"
+      data-avatar-state={state}
+      data-speech-energy={speechEnergy}
+    />
+  )
 }

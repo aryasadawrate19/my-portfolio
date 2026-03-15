@@ -1,0 +1,154 @@
+[
+  {
+    "text": "# About Me\r\n\r\nI am a student developer and AI/ML enthusiast focused on building intelligent software systems that combine strong engineering foundations with practical machine learning applications.\r\n\r\nMy work sits at the intersection of artificial intelligence, developer tools, and system design. I am particularly interested in building systems where machine learning models interact with structured reasoning, operating systems, and real-world workflows.\r\n\r\nI have worked on projects involving la",
+    "source": "about.md"
+  },
+  {
+    "text": "rkflows.\r\n\r\nI have worked on projects involving large language models, retrieval-augmented generation (RAG) systems, semantic search pipelines, and AI-powered developer environments. My projects often explore how AI can be integrated into everyday software systems rather than treated as isolated models.\r\n\r\nOne of my notable projects is **AInux**, an experimental AI-native Linux environment designed to integrate large language models directly into system workflows. The project explores ideas such",
+    "source": "about.md"
+  },
+  {
+    "text": " system workflows. The project explores ideas such as natural-language system interaction, AI-assisted shell commands, and persistent contextual memory within an operating system.\r\n\r\nI also build intelligent document understanding systems, including LLM-powered query and retrieval platforms capable of processing PDFs, emails, and structured enterprise documents. These systems focus on extracting relevant information, matching clauses, and generating structured explanations.\r\n\r\nBeyond AI systems,",
+    "source": "about.md"
+  },
+  {
+    "text": "ing structured explanations.\r\n\r\nBeyond AI systems, I develop full-stack web applications using modern tools such as React, TypeScript, and TailwindCSS. I place strong emphasis on clean architecture, modular components, and responsive user interfaces that remain performant and maintainable.\r\n\r\n## My Interests\r\n\r\n- Machine learning systems engineering  \r\n- Retrieval-augmented generation and knowledge systems  \r\n- Neuro-symbolic reasoning approaches in AI  \r\n- Developer tools and AI-assisted enviro",
+    "source": "about.md"
+  },
+  {
+    "text": " in AI  \r\n- Developer tools and AI-assisted environments  \r\n- Human–AI interaction and intelligent interfaces  \r\n\r\nI am motivated by building software that not only demonstrates technical capability but also explores how intelligent systems can augment real-world workflows and developer productivity.",
+    "source": "about.md"
+  },
+  {
+    "text": "# Education\r\n\r\nMy academic background focuses on artificial intelligence, machine learning, and intelligent software systems.\r\n\r\n## B.Tech in Computer Science (AI & ML)\r\n\r\nI am currently pursuing a **Bachelor of Technology in Computer Science with a specialization in Artificial Intelligence and Machine Learning** at **Vishwakarma Institute of Technology (VIT)**.\r\n\r\nMy studies focus on deep learning, intelligent systems, and modern AI architectures. Through this program I explore neural networks,",
+    "source": "education.md"
+  },
+  {
+    "text": "s. Through this program I explore neural networks, machine learning pipelines, and the design of intelligent software systems that combine data-driven models with practical engineering.\r\n\r\n**Duration:** 2024 – 2027  \r\n**Status:** Currently pursuing\r\n\r\n## Diploma in Artificial Intelligence & Machine Learning\r\n\r\nBefore my B.Tech, I completed a **Diploma in Artificial Intelligence and Machine Learning** from **Government Polytechnic**.\r\n\r\nDuring this program I built a strong foundation in programmi",
+    "source": "education.md"
+  },
+  {
+    "text": "s program I built a strong foundation in programming, computational theory, and applied machine learning. The curriculum emphasized practical system development and hands-on projects involving AI models and software engineering.\r\n\r\nI graduated with **91.53%**, placing me in the **99th percentile**.\r\n\r\n**Duration:** 2021 – 2024  \r\n**Final Score:** 91.53%",
+    "source": "education.md"
+  },
+  {
+    "text": "# Experience\r\n\r\nMy experience primarily comes from building and experimenting with real-world software systems and applied AI projects.\r\n\r\nI work across the full stack, designing both user-facing interfaces and backend systems that power intelligent applications. Many of my projects involve integrating machine learning models with practical software environments such as web applications, operating systems, and embedded devices.\r\n\r\n## AI and Machine Learning Systems\r\n\r\nI have experience building ",
+    "source": "experience.md"
+  },
+  {
+    "text": "ne Learning Systems\r\n\r\nI have experience building applied AI systems that combine machine learning models with real-world software workflows.\r\n\r\nThis includes:\r\n\r\n- Developing computer vision applications using PyTorch and deep learning models\r\n- Building retrieval-augmented generation (RAG) systems for document understanding and intelligent assistants\r\n- Integrating large language models such as Google Gemini into applications using frameworks like LangChain\r\n- Designing vector database pipelin",
+    "source": "experience.md"
+  },
+  {
+    "text": "ike LangChain\r\n- Designing vector database pipelines using tools such as FAISS and Weaviate\r\n\r\nThese projects focus on making machine learning models usable within larger software systems rather than treating them as standalone experiments.\r\n\r\n## Intelligent Software and System Design\r\n\r\nI have worked on several system-level and AI-integrated projects that explore how intelligent agents can interact with software environments.\r\n\r\nExamples include:\r\n\r\n- Designing **AINux**, an experimental AI-nat",
+    "source": "experience.md"
+  },
+  {
+    "text": ":\r\n\r\n- Designing **AINux**, an experimental AI-native development environment where an intelligent agent can interpret developer intent and automate system workflows\r\n- Building AI-powered tools that combine natural language interfaces with structured retrieval systems\r\n- Experimenting with high-performance inter-process communication and modular system architectures\r\n\r\n## Full-Stack Development\r\n\r\nAlongside AI systems, I develop full-stack web applications that provide clean and responsive user",
+    "source": "experience.md"
+  },
+  {
+    "text": "pplications that provide clean and responsive user interfaces for complex backend functionality.\r\n\r\nMy work typically involves:\r\n\r\n- React and TypeScript for frontend development\r\n- Node.js-based backend APIs\r\n- API integration and structured data pipelines\r\n- Designing modular and maintainable application architecture\r\n\r\nAcross my projects, I focus on building systems that are technically robust, easy to extend, and capable of integrating intelligent behavior into real software environments.",
+    "source": "experience.md"
+  },
+  {
+    "text": "igent behavior into real software environments.",
+    "source": "experience.md"
+  },
+  {
+    "text": "# Personal Interests and Motivation\r\n\r\n## What Inspired Me to Work in AI\r\n\r\nI became interested in artificial intelligence because it combines several areas I enjoy: mathematics, programming, and systems thinking. What fascinates me most is the ability to build systems that can reason about information, learn from data, and assist humans in solving complex problems.\r\n\r\nRather than treating AI as a standalone model, I enjoy exploring how intelligent systems can be integrated into real software en",
+    "source": "fun.md"
+  },
+  {
+    "text": "nt systems can be integrated into real software environments such as operating systems, developer tools, and interactive applications.\r\n\r\n## What I Enjoy Building\r\n\r\nI enjoy building systems where machine learning interacts with larger software architectures. This includes projects where AI models are embedded into developer tools, operating systems, or real-world applications.\r\n\r\nSome of my favourite types of projects involve:\r\n\r\n- AI-powered developer environments\r\n- Retrieval systems that hel",
+    "source": "fun.md"
+  },
+  {
+    "text": "veloper environments\r\n- Retrieval systems that help users find information quickly\r\n- Computer vision systems that interact with the physical world\r\n- Intelligent assistants built on top of structured knowledge bases\r\n\r\n## Problems I Like Solving\r\n\r\nI enjoy working on problems that involve both engineering and reasoning. In particular, I like designing systems that combine multiple components such as machine learning models, backend services, and user interfaces.\r\n\r\nI am especially interested in",
+    "source": "fun.md"
+  },
+  {
+    "text": " user interfaces.\r\n\r\nI am especially interested in challenges related to:\r\n\r\n- building reliable AI systems\r\n- improving how humans interact with intelligent software\r\n- designing scalable retrieval and knowledge systems\r\n- integrating AI into everyday development workflows\r\n\r\n## What Motivates Me\r\n\r\nWhat motivates me most is the process of turning complex ideas into working systems. I enjoy experimenting with new architectures, building prototypes, and refining them into practical tools.\r\n\r\nI f",
+    "source": "fun.md"
+  },
+  {
+    "text": "es, and refining them into practical tools.\r\n\r\nI find it rewarding when a project moves beyond theory and becomes something people can actually interact with, whether it is an AI assistant, a developer tool, or an intelligent application.",
+    "source": "fun.md"
+  },
+  {
+    "text": "# Profile\r\n\r\nMy name is Arya Sadawrate and I am a student developer focused on building intelligent software systems that combine artificial intelligence with practical engineering.\r\n\r\nI am currently pursuing a **B.Tech in Computer Science with a specialization in Artificial Intelligence and Machine Learning** at **Vishwakarma Institute of Technology (VIT)**. Before that, I completed a **Diploma in Artificial Intelligence and Machine Learning** from Government Polytechnic, graduating with **91.5",
+    "source": "profile.md"
+  },
+  {
+    "text": "rom Government Polytechnic, graduating with **91.53% (99th percentile)**.\r\n\r\nMy work focuses on integrating machine learning models into real-world systems rather than treating them as isolated experiments. I am particularly interested in how AI can interact with operating systems, developer tools, and structured knowledge systems.\r\n\r\n## What I Build\r\n\r\nI build projects that combine AI, system design, and modern software engineering. My work includes:\r\n\r\n- AI-native development environments\r\n- C",
+    "source": "profile.md"
+  },
+  {
+    "text": "udes:\r\n\r\n- AI-native development environments\r\n- Computer vision systems\r\n- Retrieval-augmented generation (RAG) pipelines\r\n- Intelligent document analysis systems\r\n- AI-powered developer tools\r\n\r\nOne of my key projects is **AINux**, an experimental AI-augmented development environment built on Debian that integrates an intelligent agent directly into the operating system.\r\n\r\n## Technologies I Work With\r\n\r\nI commonly work with:\r\n\r\nProgramming Languages:\r\n- Python\r\n- TypeScript / JavaScript\r\n- Go",
+    "source": "profile.md"
+  },
+  {
+    "text": "guages:\r\n- Python\r\n- TypeScript / JavaScript\r\n- Go\r\n\r\nAI & Machine Learning:\r\n- PyTorch\r\n- Computer Vision (YOLO, CNNs)\r\n- Retrieval-Augmented Generation (RAG)\r\n- Vector databases such as FAISS and Weaviate\r\n- LLM integrations using Google Gemini and LangChain\r\n\r\nWeb Development:\r\n- React\r\n- TailwindCSS\r\n- Node.js\r\n- REST APIs\r\n\r\nSystems & Tools:\r\n- Linux-based development environments\r\n- Git and GitHub\r\n- Modular software architecture\r\n\r\n## Areas of Interest\r\n\r\nI am particularly interested in:\r",
+    "source": "profile.md"
+  },
+  {
+    "text": "s of Interest\r\n\r\nI am particularly interested in:\r\n\r\n- Machine learning systems engineering\r\n- Retrieval and knowledge-based AI systems\r\n- Neuro-symbolic reasoning approaches\r\n- AI-assisted development environments\r\n- Human–AI interaction and intelligent interfaces\r\n\r\n## Development Philosophy\r\n\r\nI enjoy building systems that combine clean architecture with practical intelligence. My goal is to create software that not only demonstrates technical capability but also explores how intelligent syst",
+    "source": "profile.md"
+  },
+  {
+    "text": " capability but also explores how intelligent systems can augment real-world workflows and developer productivity.",
+    "source": "profile.md"
+  },
+  {
+    "text": "# Projects\r\n\r\nI build projects that explore the intersection of artificial intelligence, systems engineering, and intelligent interfaces. My work ranges from operating system–level AI agents to embedded assistive technologies and applied machine learning systems.\r\n\r\nMany of my projects focus on combining machine learning with real-world systems, where models interact with hardware, operating systems, or structured knowledge pipelines rather than existing as isolated experiments.\r\n\r\n## AINux\r\n\r\nA",
+    "source": "projects.md"
+  },
+  {
+    "text": "existing as isolated experiments.\r\n\r\n## AINux\r\n\r\nAINux is an AI-augmented development environment built on Debian. It embeds an intelligent agent directly into the operating system to interpret user intent and automate workflows.\r\n\r\nThe system uses a hybrid architecture combining a Go-based core with a Python-based machine learning agent. Communication between components is handled through high-performance Unix socket IPC, allowing the AI layer to interact efficiently with system processes.\r\n\r\nT",
+    "source": "projects.md"
+  },
+  {
+    "text": "o interact efficiently with system processes.\r\n\r\nThe project also explores concepts such as AI-assisted shell interactions, system automation through natural language, and Git-based system state snapshotting.\r\n\r\n## OrthoLens\r\n\r\nOrthoLens is a real-time augmented reality system designed to assist medical professionals by overlaying diagnostic indicators onto live camera feeds.\r\n\r\nThe system combines computer vision and machine learning models with AR rendering. It performs live inference using Py",
+    "source": "projects.md"
+  },
+  {
+    "text": " AR rendering. It performs live inference using PyTorch models while rendering augmented visual cues through AR frameworks such as Unity or WebXR.\r\n\r\nInteraction with the system is designed to be intuitive through gesture and voice-based controls.\r\n\r\n## VisionAid\r\n\r\nVisionAid is an offline assistive device designed for visually impaired users. The system combines computer vision with sensor-based obstacle detection on a Raspberry Pi.\r\n\r\nIt uses object detection models such as YOLO along with cla",
+    "source": "projects.md"
+  },
+  {
+    "text": "bject detection models such as YOLO along with classical computer vision techniques like HOG for identifying nearby objects. Ultrasonic sensors provide additional environmental awareness, while an offline speech system powered by Vosk provides real-time audio feedback to the user.\r\n\r\nThe system is designed to operate fully offline, making it suitable for low-connectivity environments.\r\n\r\n## VerifyMD\r\n\r\nVerifyMD is an AI-powered assistant designed to support orthopedic doctors in analyzing X-ray ",
+    "source": "projects.md"
+  },
+  {
+    "text": " to support orthopedic doctors in analyzing X-ray images.\r\n\r\nThe system uses a ResNet-based convolutional neural network trained to classify orthopedic conditions with high accuracy. It integrates large language models through Google Gemini and LangChain to enable conversational interaction with medical data.\r\n\r\nA FAISS-based vector retrieval system allows doctors to query medical knowledge and receive contextual explanations alongside model predictions.\r\n\r\n## Vector Database Optimization System",
+    "source": "projects.md"
+  },
+  {
+    "text": "ictions.\r\n\r\n## Vector Database Optimization System for LLM Retrieval Pipelines\r\n\r\nThis project explores performance optimization techniques for vector databases used in large language model retrieval pipelines.\r\n\r\nThe system benchmarks different vector indexing strategies, including HNSW-based approximate nearest neighbour search, against exact search baselines. It evaluates the trade-offs between latency, recall, and throughput across different configurations.\r\n\r\nThe project aims to improve ret",
+    "source": "projects.md"
+  },
+  {
+    "text": "configurations.\r\n\r\nThe project aims to improve retrieval performance for RAG-based systems by identifying optimal indexing parameters and database configurations for large-scale embedding workloads.",
+    "source": "projects.md"
+  },
+  {
+    "text": "# Skills\r\n\r\nMy technical work spans artificial intelligence systems, full-stack development, and software architecture for intelligent applications.\r\n\r\n## Programming Languages\r\n\r\nI primarily work with:\r\n\r\n- Python for machine learning, AI systems, and data processing  \r\n- TypeScript and JavaScript for modern web applications  \r\n- Go for high-performance system components and backend services  \r\n\r\n## Artificial Intelligence & Machine Learning\r\n\r\nI develop applied machine learning systems using m",
+    "source": "skills.md"
+  },
+  {
+    "text": "I develop applied machine learning systems using modern frameworks and tools.\r\n\r\n- PyTorch for building and training deep learning models  \r\n- Computer vision models such as YOLO and CNN architectures  \r\n- Retrieval-Augmented Generation (RAG) systems for intelligent assistants  \r\n- Vector databases and similarity search pipelines  \r\n- AI-powered developer tools and intelligent interfaces  \r\n\r\n## Full-Stack Development\r\n\r\nI build modern web applications using a structured and modular approach.\r\n\r",
+    "source": "skills.md"
+  },
+  {
+    "text": "ations using a structured and modular approach.\r\n\r\n- React with TypeScript for scalable frontend applications  \r\n- TailwindCSS for responsive and maintainable UI design  \r\n- Node.js and Express for backend APIs and services  \r\n- REST API design and integration  \r\n\r\n## AI Systems & Infrastructure\r\n\r\nMany of my projects involve integrating machine learning models into larger software systems.\r\n\r\n- Vector databases such as FAISS and Weaviate  \r\n- LLM integrations including Google Gemini and LangCha",
+    "source": "skills.md"
+  },
+  {
+    "text": "M integrations including Google Gemini and LangChain  \r\n- Retrieval pipelines for document understanding systems  \r\n- System-level integrations between AI agents and software environments  \r\n\r\n## Tools & Development Workflow\r\n\r\nI follow modern development workflows focused on reliability and maintainability.\r\n\r\n- Git and GitHub for version control and collaboration  \r\n- Linux-based development environments  \r\n- Modular code structure and maintainable architecture  \r\n- Performance-conscious syste",
+    "source": "skills.md"
+  },
+  {
+    "text": "able architecture  \r\n- Performance-conscious system design",
+    "source": "skills.md"
+  }
+]

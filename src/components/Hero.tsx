@@ -2,46 +2,99 @@ import { useEffect, useRef, useState } from "react";
 import { ChevronDown, ArrowRight, Github, Linkedin } from "lucide-react";
 import { motion } from "framer-motion";
 import AvatarParticles from "./AvatarParticles";
-/*import AvatarBinary from "./AvatarBinary";*/
 import QuestionHUD from "./AIAssistant/QuestionHUD";
+import { SpeechController } from "../../lib/speech/SpeechController";
+import { useSpeechEnergy } from "../../lib/speech/useSpeechEnergy";
 
 export default function Hero() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const speechRef = useRef<SpeechController | null>(null);
+
+  if (!speechRef.current) {
+    speechRef.current = new SpeechController();
+  }
+
   const [displayText, setDisplayText] = useState("");
+  const [avatarState, setAvatarState] = useState<"idle" | "thinking" | "speaking">("idle");
+
+  const [assistantQuestion, setAssistantQuestion] = useState("");
+  const [assistantAnswer, setAssistantAnswer] = useState("");
+  const [typedAnswer, setTypedAnswer] = useState("");
+
+  const [assistantLoading, setAssistantLoading] = useState(false);
+  const [assistantError, setAssistantError] = useState("");
+  const speechEnergy = useSpeechEnergy(speechRef.current);
+
   const fullText =
     "I build intelligent systems that sit at the intersection of clean math and messy human behaviour.";
 
   useEffect(() => {
     let currentIndex = 0;
+
     const interval = setInterval(() => {
       setDisplayText(fullText.slice(0, currentIndex));
       currentIndex++;
+
       if (currentIndex > fullText.length) clearInterval(interval);
     }, 40);
+
     return () => clearInterval(interval);
+  }, []);
+
+  // Typewriter effect for assistant responses
+  useEffect(() => {
+    if (!assistantAnswer) return;
+
+    let index = 1;
+    setTypedAnswer("");
+
+    const interval = setInterval(() => {
+      setTypedAnswer(assistantAnswer.slice(0, index));
+      index++;
+
+      if (index >= assistantAnswer.length) clearInterval(interval);
+    }, 15);
+
+    return () => clearInterval(interval);
+  }, [assistantAnswer]);
+
+  useEffect(() => {
+    speechRef.current?.setEvents({
+      onStart: () => setAvatarState("speaking"),
+      onEnd: () => setAvatarState("idle"),
+    });
+
+    return () => {
+      speechRef.current?.stop();
+    };
   }, []);
 
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
+
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
+
     const dpr = Math.max(1, window.devicePixelRatio || 1);
 
     const setCanvasSize = () => {
       const w = window.innerWidth;
       const h = window.innerHeight;
+
       canvas.style.width = `${w}px`;
       canvas.style.height = `${h}px`;
+
       canvas.width = Math.round(w * dpr);
       canvas.height = Math.round(h * dpr);
+
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     };
 
     setCanvasSize();
 
-    // Reduce node count on mobile for performance
     const nodeCount = window.innerWidth < 768 ? 25 : 45;
+
     const nodes = Array.from({ length: nodeCount }, () => ({
       x: Math.random() * window.innerWidth,
       y: Math.random() * window.innerHeight,
@@ -57,11 +110,14 @@ export default function Hero() {
       mouseX = e.clientX;
       mouseY = e.clientY;
     };
+
     window.addEventListener("pointermove", onPointerMove);
 
     let rafId = 0;
+
     const animateParticles = () => {
       ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+
       nodes.forEach((node, i) => {
         node.x += node.vx;
         node.y += node.vy;
@@ -80,6 +136,7 @@ export default function Hero() {
         if (node.y < 0 || node.y > window.innerHeight) node.vy *= -1;
 
         const pulseSize = 2 + Math.sin(node.pulse) * 1.5;
+
         ctx.beginPath();
         ctx.arc(node.x, node.y, pulseSize, 0, Math.PI * 2);
         ctx.fillStyle = "rgba(34, 211, 238, 0.4)";
@@ -89,10 +146,13 @@ export default function Hero() {
           const other = nodes[j];
           const dx = node.x - other.x;
           const dy = node.y - other.y;
+
           const dist2 = dx * dx + dy * dy;
           const maxDist = 150;
+
           if (dist2 < maxDist * maxDist) {
             const opacity = 0.15 * (1 - dist2 / (maxDist * maxDist));
+
             ctx.beginPath();
             ctx.moveTo(node.x, node.y);
             ctx.lineTo(other.x, other.y);
@@ -101,10 +161,12 @@ export default function Hero() {
           }
         }
       });
+
       rafId = requestAnimationFrame(animateParticles);
     };
 
     rafId = requestAnimationFrame(animateParticles);
+
     window.addEventListener("resize", setCanvasSize);
 
     return () => {
@@ -115,16 +177,40 @@ export default function Hero() {
   }, []);
 
   async function askAssistant(question: string) {
-    const res = await fetch("http://localhost:3001/api/ask", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ question }),
-    });
+    setAssistantQuestion(question);
+    setAssistantLoading(true);
+    setAvatarState("thinking");
+    setAssistantError("");
+    setAssistantAnswer("");
+    setTypedAnswer("");
 
-    const data = await res.json();
-    console.log(data.answer);
+    try {
+      const res = await fetch("/api/ask", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ question }),
+      });
+
+      if (!res.ok) {
+        const errorText = await res.text();
+        throw new Error(`Request failed (${res.status}): ${errorText || res.statusText}`);
+      }
+
+      const data = (await res.json()) as { answer?: string };
+      const answer = data.answer?.trim() || "I could not generate a response.";
+
+      setAssistantAnswer(answer);
+      speechRef.current?.speak(answer);
+      setAvatarState("idle");
+    } catch (error) {
+      console.error("Assistant request failed:", error);
+      setAssistantError("Assistant is unavailable right now. Please try again.");
+      setAvatarState("idle");
+    } finally {
+      setAssistantLoading(false);
+    }
   }
 
   return (
@@ -134,13 +220,15 @@ export default function Hero() {
       <div
         className="absolute inset-0 z-0 opacity-[0.08]"
         style={{
-          backgroundImage: `linear-gradient(to right, #1e293b 1px, transparent 1px), linear-gradient(to bottom, #1e293b 1px, transparent 1px)`,
+          backgroundImage:
+            "linear-gradient(to right, #1e293b 1px, transparent 1px), linear-gradient(to bottom, #1e293b 1px, transparent 1px)",
           backgroundSize: "40px 40px",
         }}
       />
 
       <div className="container mx-auto px-6 relative z-10 flex flex-col md:flex-row items-center justify-between gap-12">
-        {/* --- LEFT: Content --- */}
+
+        {/* LEFT SIDE */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -162,53 +250,61 @@ export default function Hero() {
               <span className="hidden md:block h-px w-8 bg-cyan-500/50" />
               AI/ML Engineer
             </h2>
+
             <p className="text-slate-400 text-base md:text-lg leading-relaxed max-w-md mx-auto md:mx-0 font-light min-h-[80px] md:min-h-[60px]">
               {displayText}
               <span className="inline-block w-1 h-4 bg-cyan-400 ml-1 animate-pulse" />
             </p>
           </div>
-
-          <div className="mt-10 flex flex-wrap justify-center md:justify-start gap-4">
-            <a
-              href="#projects"
-              className="w-full sm:w-auto px-8 py-4 bg-white text-black font-bold text-[10px] tracking-[0.2em] uppercase hover:bg-cyan-400 transition-all flex items-center justify-center gap-2"
-            >
-              View Work <ArrowRight className="w-4 h-4" />
-            </a>
-            <div className="flex gap-2">
-              <a
-                href="https://github.com/aryasadawrate19"
-                target="_blank"
-                rel="noreferrer"
-                className="p-4 border border-slate-800 text-slate-400 hover:text-white transition-all backdrop-blur-sm"
-              >
-                <Github className="w-5 h-5" />
-              </a>
-              <a
-                href="https://www.linkedin.com/in/arya-sadawrate-894a0a305"
-                target="_blank"
-                rel="noreferrer"
-                className="p-4 border border-slate-800 text-slate-400 hover:text-white transition-all backdrop-blur-sm"
-              >
-                <Linkedin className="w-5 h-5" />
-              </a>
-            </div>
-          </div>
         </motion.div>
 
-        {/* --- RIGHT: 3D Avatar Particles --- */}
+        {/* RIGHT SIDE */}
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1 }}
-          className="w-full md:w-1/2 flex flex-col items-center order-1 md:order-2"
+          className="w-full md:w-1/2 h-[calc(100vh-8rem)] flex flex-col items-center justify-between order-1 md:order-2"
         >
-          <div className="w-full max-w-[400px] relative">
+          <div className="w-full max-w-[260px] relative -translate-x-8">
             <div className="absolute inset-0 bg-cyan-500/10 blur-[80px] rounded-full" />
-            <AvatarParticles />
+            <AvatarParticles state={avatarState} speechEnergy={speechEnergy} />
           </div>
 
-          <div className="mt-8 w-full max-w-[420px] md:translate-x-9">
+          <div className="mt-6 w-full max-w-[420px] rounded-xl border border-cyan-500/25 bg-slate-900/70 backdrop-blur p-4 min-h-[120px] max-h-[180px] overflow-y-auto">
+            <p className="text-[10px] uppercase tracking-[0.2em] text-cyan-400 mb-2">
+              Arya
+            </p>
+
+            {assistantLoading && (
+              <p className="text-slate-300 text-sm">Thinking...</p>
+            )}
+
+            {!assistantLoading && assistantError && (
+              <p className="text-rose-300 text-sm">{assistantError}</p>
+            )}
+
+            {!assistantLoading && !assistantError && assistantAnswer && (
+              <>
+                <p className="text-slate-200 text-sm leading-relaxed whitespace-pre-line">
+                  {typedAnswer}
+                  {typedAnswer.length < assistantAnswer.length && (
+                    <span className="inline-block w-1 h-4 bg-cyan-400 ml-1 animate-pulse" />
+                  )}
+                </p>
+                <p className="text-slate-500 text-xs mt-3">
+                  Asked: {assistantQuestion}
+                </p>
+              </>
+            )}
+
+            {!assistantLoading && !assistantError && !assistantAnswer && (
+              <p className="text-slate-400 text-sm">
+                Select a question above to ask the assistant.
+              </p>
+            )}
+          </div>
+
+          <div className="w-full max-w-[420px]">
             <QuestionHUD onAsk={askAssistant} />
           </div>
         </motion.div>
