@@ -1,4 +1,4 @@
-import { answerQuestion } from "../server/rag";
+import { answerQuestion } from "../server/rag.js";
 
 type ApiRequest = {
   method?: string;
@@ -77,10 +77,11 @@ export default async function handler(req: ApiRequest, res: ApiResponse) {
   const rateLimitResult = checkRateLimit(clientIp);
 
   if (!rateLimitResult.allowed) {
-    res.setHeader?.("Retry-After", String(rateLimitResult.retryAfterSeconds));
+    const denied = rateLimitResult as { allowed: false; retryAfterSeconds: number };
+    res.setHeader?.("Retry-After", String(denied.retryAfterSeconds));
     return res.status(429).json({
       error: "Too many requests. Please try again shortly.",
-      retryAfterSeconds: rateLimitResult.retryAfterSeconds,
+      retryAfterSeconds: denied.retryAfterSeconds,
     });
   }
 

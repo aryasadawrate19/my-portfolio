@@ -1,12 +1,28 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
-import store from "./vectorstore.json";
+import { readFileSync } from "fs";
+import { fileURLToPath } from "url";
+import { dirname, join } from "path";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 type StoreChunk = {
   text: string;
   source?: string;
 };
 
-const runtimeStore: StoreChunk[] = Array.isArray(store) ? (store as StoreChunk[]) : [];
+function loadVectorstore(): StoreChunk[] {
+  try {
+    const raw = readFileSync(join(__dirname, "vectorstore.json"), "utf-8");
+    const parsed = JSON.parse(raw) as unknown;
+    return Array.isArray(parsed) ? (parsed as StoreChunk[]) : [];
+  } catch (err) {
+    console.error("[rag] Failed to load vectorstore.json:", err);
+    return [];
+  }
+}
+
+const runtimeStore: StoreChunk[] = loadVectorstore();
 
 const INTENT_MAP: Record<string, string[]> = {
   projects: [
