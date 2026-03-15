@@ -79,8 +79,8 @@ export default function Hero() {
     const dpr = Math.max(1, window.devicePixelRatio || 1);
 
     const setCanvasSize = () => {
-      const w = window.innerWidth;
-      const h = window.innerHeight;
+      const w = document.documentElement.clientWidth;
+      const h = document.documentElement.clientHeight;
 
       canvas.style.width = `${w}px`;
       canvas.style.height = `${h}px`;
@@ -214,7 +214,7 @@ export default function Hero() {
   }
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-slate-950 pt-24 pb-12">
+    <section className="relative min-h-[100svh] flex items-center justify-center overflow-hidden bg-slate-950 pt-24 pb-12">
       <canvas ref={canvasRef} className="absolute inset-0 z-0 opacity-60" />
 
       <div
@@ -226,7 +226,7 @@ export default function Hero() {
         }}
       />
 
-      <div className="container mx-auto px-6 relative z-10 flex flex-col md:flex-row items-center justify-between gap-12">
+      <div className="container mx-auto px-4 md:px-6 relative z-10 flex flex-col md:flex-row items-center justify-between gap-10 md:gap-12">
 
         {/* LEFT SIDE */}
         <motion.div
@@ -263,10 +263,9 @@ export default function Hero() {
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1 }}
-          className="w-full md:w-1/2 h-[calc(100vh-8rem)] flex flex-col items-center justify-between order-1 md:order-2"
+          className="w-full md:w-1/2 flex flex-col items-center justify-center gap-6 md:gap-10 order-1 md:order-2"
         >
-          <div className="w-full max-w-[260px] relative -translate-x-8">
-            <div className="absolute inset-0 bg-cyan-500/10 blur-[80px] rounded-full" />
+          <div className="w-full max-w-[220px] md:max-w-[260px] relative scale-75 md:scale-100 -translate-x-20 md:-translate-x-8">            <div className="absolute inset-0 bg-cyan-500/10 blur-[80px] rounded-full" />
             <AvatarParticles state={avatarState} speechEnergy={speechEnergy} />
           </div>
 

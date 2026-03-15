@@ -113,7 +113,7 @@ export default function AvatarParticles({ state = "idle", speechEnergy = 0 }: Pr
     })
 
     const setSize = () => {
-      const size = Math.max(220, Math.min(260, mount.clientWidth || 260))
+      const size = Math.max(120, Math.min(260, mount.clientWidth || 160))
       renderer.setSize(size, size, false)
       camera.aspect = 1
       camera.updateProjectionMatrix()
@@ -122,7 +122,7 @@ export default function AvatarParticles({ state = "idle", speechEnergy = 0 }: Pr
     setSize()
 
     const isMobile = window.innerWidth < 768
-    const sampleStep = isMobile ? 2 : 1
+    const sampleStep = 1
 
     const loader = new THREE.TextureLoader()
     loader.load(
