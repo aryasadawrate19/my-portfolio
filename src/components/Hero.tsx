@@ -265,7 +265,8 @@ export default function Hero() {
           transition={{ duration: 1 }}
           className="w-full md:w-1/2 flex flex-col items-center justify-center gap-6 md:gap-10 order-1 md:order-2"
         >
-          <div className="w-full max-w-[220px] md:max-w-[260px] relative scale-75 md:scale-100 -translate-x-20 md:-translate-x-8">            <div className="absolute inset-0 bg-cyan-500/10 blur-[80px] rounded-full" />
+          <div className="w-full max-w-[220px] md:max-w-[260px] relative scale-75 md:scale-100 -translate-x-20 md:-translate-x-8">            
+            <div className="absolute inset-0 bg-cyan-500/10 blur-[80px] rounded-full" />
             <AvatarParticles state={avatarState} speechEnergy={speechEnergy} />
           </div>
 
