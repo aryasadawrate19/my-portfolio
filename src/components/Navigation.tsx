@@ -1,15 +1,54 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Menu, X } from "lucide-react";
 
 export default function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isResumeMenuOpen, setIsResumeMenuOpen] = useState(false);
+  const resumeMenuRef = useRef<HTMLDivElement>(null);
+
+  const resumeOptions = [
+    {
+      href: "/Aarya_Sadawrate_VIT_CV.pdf",
+      label: "SDE Resume",
+      description: "Software engineering focus",
+    },
+    {
+      href: "/Aarya_Sadawrate_VIT_GenAI.pdf",
+      label: "GenAI Resume",
+      description: "Generative AI focus",
+    },
+  ];
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 20);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  useEffect(() => {
+    if (!isResumeMenuOpen) return;
+
+    const handlePointerDown = (event: MouseEvent) => {
+      if (resumeMenuRef.current && !resumeMenuRef.current.contains(event.target as Node)) {
+        setIsResumeMenuOpen(false);
+      }
+    };
+
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setIsResumeMenuOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handlePointerDown);
+    document.addEventListener("keydown", handleEscape);
+
+    return () => {
+      document.removeEventListener("mousedown", handlePointerDown);
+      document.removeEventListener("keydown", handleEscape);
+    };
+  }, [isResumeMenuOpen]);
 
   const navLinks = [
     { href: "#about", label: "About" },
@@ -19,7 +58,10 @@ export default function Navigation() {
     { href: "#contact", label: "Contact" },
   ];
 
-  const handleLinkClick = () => setIsMobileMenuOpen(false);
+  const handleLinkClick = () => {
+    setIsMobileMenuOpen(false);
+    setIsResumeMenuOpen(false);
+  };
 
   return (
     <nav
@@ -61,14 +103,39 @@ export default function Navigation() {
             ))}
           </div>
 
-          <a
-            href="/Aarya_Sadawrate_VIT.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="px-6 py-2.5 bg-white text-black font-bold text-[11px] tracking-[0.15em] uppercase hover:bg-cyan-400 transition-all"
-          >
-            Resume
-          </a>
+          <div className="relative" ref={resumeMenuRef}>
+            <button
+              type="button"
+              onClick={() => setIsResumeMenuOpen((open) => !open)}
+              className="px-6 py-2.5 bg-white text-black font-bold text-[11px] tracking-[0.15em] uppercase hover:bg-cyan-400 transition-all"
+              aria-haspopup="menu"
+              aria-expanded={isResumeMenuOpen}
+            >
+              Resume
+            </button>
+
+            {isResumeMenuOpen && (
+              <div className="absolute right-0 top-full mt-3 w-64 border border-slate-800 bg-slate-950/95 p-2 shadow-2xl shadow-cyan-950/30 backdrop-blur-xl">
+                {resumeOptions.map((resume) => (
+                  <a
+                    key={resume.href}
+                    href={resume.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => setIsResumeMenuOpen(false)}
+                    className="block border border-transparent px-4 py-3 text-left transition-all hover:border-cyan-500 hover:bg-slate-900"
+                  >
+                    <span className="block text-[11px] font-bold tracking-[0.18em] text-white uppercase">
+                      {resume.label}
+                    </span>
+                    <span className="mt-1 block text-[10px] font-mono tracking-[0.14em] text-slate-400 uppercase">
+                      {resume.description}
+                    </span>
+                  </a>
+                ))}
+              </div>
+            )}
+          </div>
         </div>
 
         {/* Mobile Toggle */}
@@ -99,12 +166,25 @@ export default function Navigation() {
               {link.label}
             </a>
           ))}
-          <a
-            href="/Aarya_Sadawrate_VIT.pdf"
-            className="text-center py-4 border border-slate-800 text-white font-mono text-xs tracking-widest bg-slate-900/50 hover:border-cyan-500 transition-colors"
-          >
-            DOWNLOAD_RESUME.EXE
-          </a>
+          <div className="border border-slate-800 bg-slate-900/50 p-4">
+            <p className="text-center font-mono text-xs tracking-widest text-white">
+              DOWNLOAD_RESUME.EXE
+            </p>
+            <div className="mt-4 flex flex-col gap-3">
+              {resumeOptions.map((resume) => (
+                <a
+                  key={resume.href}
+                  href={resume.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={handleLinkClick}
+                  className="border border-slate-800 px-4 py-3 text-center font-mono text-[11px] tracking-[0.22em] text-slate-200 uppercase transition-colors hover:border-cyan-500 hover:text-white"
+                >
+                  {resume.label}
+                </a>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </nav>
