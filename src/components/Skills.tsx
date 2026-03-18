@@ -1,8 +1,8 @@
 import { motion } from 'framer-motion';
 import { 
   SiPython, SiCplusplus, SiMysql, SiPytorch, SiTensorflow, 
-  SiScikitlearn, SiLangchain, SiPandas, SiNumpy, SiPlotly, 
-  SiGit, SiGithub, SiDocker, SiPostman, SiFramer, SiWix, SiCanva
+  SiScikitlearn, SiLangchain, SiPandas,SiNumpy, SiPlotly, SiLinux,
+  SiGit, SiDocker, SiPostman, SiFramer, SiWix, SiCanva
 } from 'react-icons/si';
 import { FaJava } from 'react-icons/fa';
 
@@ -17,6 +17,8 @@ const skillCategories = [
       { name: "Scikit-Learn", icon: SiScikitlearn, color: "#F7931E" },
       { name: "LangChain", icon: SiLangchain, color: "#00A3E0" },
       { name: "Pandas", icon: SiPandas, color: "#150458" },
+      {name: "NumPy", icon: SiNumpy, color: "#013243" },
+      { name: "Plotly", icon: SiPlotly, color: "#3F4C6B" },
     ]
   },
   {
@@ -38,6 +40,7 @@ const skillCategories = [
       { name: "Git", icon: SiGit, color: "#F05032" },
       { name: "MySQL", icon: SiMysql, color: "#4479A1" },
       { name: "Postman", icon: SiPostman, color: "#FF6C37" },
+      { name: "Linux", icon: SiLinux, color: "#FCC624" },
     ]
   },
   {

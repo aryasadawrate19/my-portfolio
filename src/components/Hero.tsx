@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from "react";
-import { ChevronDown, ArrowRight, Github, Linkedin } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 import { motion } from "framer-motion";
 import AvatarParticles from "./AvatarParticles";
-import QuestionHUD from "./AIAssistant/QuestionHUD";
+import QuestionHUD, { getAnswer } from "./AIAssistant/QuestionHUD";
 import { SpeechController } from "../../lib/speech/SpeechController";
 import { useSpeechEnergy } from "../../lib/speech/useSpeechEnergy";
 
@@ -185,21 +185,11 @@ export default function Hero() {
     setTypedAnswer("");
 
     try {
-      const res = await fetch("/api/ask", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ question }),
+      await new Promise<void>((resolve) => {
+        setTimeout(() => resolve(), 300);
       });
 
-      if (!res.ok) {
-        const errorText = await res.text();
-        throw new Error(`Request failed (${res.status}): ${errorText || res.statusText}`);
-      }
-
-      const data = (await res.json()) as { answer?: string };
-      const answer = data.answer?.trim() || "I could not generate a response.";
+      const answer = getAnswer(question);
 
       setAssistantAnswer(answer);
       speechRef.current?.speak(answer);

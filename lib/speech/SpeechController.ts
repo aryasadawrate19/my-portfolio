@@ -18,6 +18,7 @@ export class SpeechController {
 
 	speak(text: string) {
 		if (!text.trim()) return;
+		this.ensureAudioGraph();
 
 		// TODO: Replace this placeholder with ElevenLabs playback pipeline.
 		// Keeping this no-op for now disables all TTS output.

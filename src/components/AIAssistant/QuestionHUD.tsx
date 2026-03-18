@@ -2,6 +2,44 @@ import { useState } from "react"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import { motion } from "framer-motion"
 
+const ANSWERS: Record<string, string> = {
+  projects:
+    "I build projects at the intersection of AI, systems engineering, and full-stack development. My portfolio includes AI-native tooling, computer vision solutions, and production-style web apps with strong emphasis on architecture and usability. I focus on building practical systems that solve real problems, not just demos.",
+  education:
+    "I am pursuing a B.Tech in Computer Science and Engineering with a specialization in AI and Robotics at VIT. Before that, I completed my diploma in Computer Engineering from Government Polytechnic with a 99th percentile score. My academic path has given me a strong foundation in both software engineering and applied AI.",
+  experience:
+    "I have hands-on experience building applied machine learning systems and full-stack applications. My work includes computer vision pipelines, intelligent assistants, and modular web platforms using React, TypeScript, and Node.js. I prioritize maintainability, performance, and clean system design in every project.",
+  skills:
+    "My core skills include Python, TypeScript, JavaScript, and modern web development with React and TailwindCSS. I also work with machine learning and computer vision using PyTorch, along with backend API development and system integration. I am comfortable designing end-to-end solutions from model logic to user interface.",
+  about:
+    "I am a developer focused on building intelligent, reliable software systems that combine strong engineering with practical AI. I enjoy working on products where machine learning, backend services, and user experience come together. My goal is to create tools that are both technically solid and genuinely useful.",
+  inspiration:
+    "I am inspired by the challenge of turning complex technical ideas into real, working products. Building systems that help people work faster, think better, or solve difficult problems keeps me motivated. I enjoy continuous learning and pushing my projects to a production-quality standard.",
+}
+
+type AnswerKey = keyof typeof ANSWERS
+
+const INTENTS: Array<{ keywords: string[]; key: AnswerKey }> = [
+  { keywords: ["project", "build", "portfolio"], key: "projects" },
+  { keywords: ["education", "study", "college", "degree"], key: "education" },
+  { keywords: ["experience", "intern", "career", "work"], key: "experience" },
+  { keywords: ["skill", "tech", "stack", "language", "tool"], key: "skills" },
+  { keywords: ["about", "who", "introduce", "yourself"], key: "about" },
+  { keywords: ["why", "inspiration", "motivation", "inspire"], key: "inspiration" },
+]
+
+export function getAnswer(question: string): string {
+  const q = question.toLowerCase()
+
+  for (const intent of INTENTS) {
+    if (intent.keywords.some((keyword) => q.includes(keyword))) {
+      return ANSWERS[intent.key]
+    }
+  }
+
+  return "I don't have that information in my portfolio."
+}
+
 interface Props {
   onAsk: (question: string) => void
 }

@@ -120,8 +120,6 @@ export default function AvatarParticles({ state = "idle", speechEnergy = 0 }: Pr
     }
 
     setSize()
-
-    const isMobile = window.innerWidth < 768
     const sampleStep = 1
 
     const loader = new THREE.TextureLoader()
